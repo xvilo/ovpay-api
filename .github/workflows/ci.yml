@@ -3,7 +3,7 @@ name: CI
 on: [push]
 
 jobs:
-  lint phpstan:
+  lint-phpstan:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
