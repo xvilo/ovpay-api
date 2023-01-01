@@ -1,0 +1,11 @@
+{
+    "name": "xvilo/ovpay-api",
+    "description": "OVpay API client written in PHP",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Xvilo\\OVpayApi\\": "src/"
+        }
+    },
+    "require": {}
+}
