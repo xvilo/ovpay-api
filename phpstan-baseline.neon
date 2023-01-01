@@ -1,0 +1,6 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Method Xvilo\\\\OVpayApi\\\\Api\\\\AnonymousApi\\:\\:getNotices\\(\\) should return array\\<string, array\\<string, mixed\\>\\> but returns array\\<int\\|string, mixed\\>\\|string\\.$#"
+			count: 1
+			path: src/Api/AnonymousApi.php
