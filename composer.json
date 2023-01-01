@@ -10,8 +10,7 @@
     "require": {
         "php": "^8.1",
         "php-http/client-common": "^2.6",
-        "php-http/discovery": "^1.14",
-        "symfony/polyfill-php82": "^1.27"
+        "php-http/discovery": "^1.14"
     },
     "require-dev": {
         "phpstan/phpstan": "^1.9",
