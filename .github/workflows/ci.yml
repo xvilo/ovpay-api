@@ -14,4 +14,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: php-actions/composer@v6
-      - ./vendor/bin/rector process
+      - uses: php-actions/composer@v6
+        with:
+          command: exec rector process
