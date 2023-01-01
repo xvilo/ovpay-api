@@ -4,11 +4,11 @@ namespace Xvilo\OVpayApi;
 
 use Http\Client\Common\HttpMethodsClient;
 use Http\Client\Common\Plugin\AddHostPlugin;
-use Http\Client\Common\Plugin\AddPathPlugin;
 use Http\Client\Common\Plugin\HeaderAppendPlugin;
 use Http\Client\Common\Plugin\RedirectPlugin;
 use Http\Discovery\Psr17FactoryDiscovery;
 use Xvilo\OVpayApi\Api\AnonymousApi;
+use Xvilo\OVpayApi\Authentication\AuthMethod;
 use Xvilo\OVpayApi\HttpClient\HttpClientBuilder;
 
 class Client
@@ -32,6 +32,11 @@ class Client
     public function anonymous(): AnonymousApi
     {
         return $this->anonymous;
+    }
+
+    public function authenticate(AuthMethod $method): self
+    {
+        return $this;
     }
 
     public function getHttpClient(): HttpMethodsClient
