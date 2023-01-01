@@ -19,7 +19,7 @@ abstract class AbstractApi
      * @param array<string, string> $parameters
      * @param array<string, string> $requestHeaders
      *
-     * @return array
+     * @return array|string
      * @throws JsonException
      *
      * @throws Exception
@@ -31,6 +31,10 @@ abstract class AbstractApi
         }
 
         $response = $this->client->getHttpClient()->get($path, $requestHeaders);
-        return (array) json_decode($response->getBody()->getContents(), true, 512, JSON_THROW_ON_ERROR);
+        try {
+            return (array) json_decode($response->getBody()->getContents(), true, 512, JSON_THROW_ON_ERROR);
+        } catch (JsonException) {
+            return $response->getBody()->getContents();
+        }
     }
 }
