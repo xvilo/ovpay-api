@@ -13,7 +13,10 @@ use Xvilo\OVpayApi\HttpClient\HttpClientBuilder;
 
 class Client
 {
-    public const VERSION = '0.0.1';
+    /**
+     * @var string
+     */
+    final public const VERSION = '0.0.1';
 
     private readonly AnonymousApi $anonymous;
 

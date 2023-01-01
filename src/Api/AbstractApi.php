@@ -19,12 +19,12 @@ abstract class AbstractApi
      * @param array<string, string> $parameters
      * @param array<string, string> $requestHeaders
      *
-     * @return array|string
      * @throws JsonException
-     *
      * @throws Exception
+     *
+     * @return array<int|string, mixed>|string
      */
-    protected function get(string $path, array $parameters = [], array $requestHeaders = [])
+    protected function get(string $path, array $parameters = [], array $requestHeaders = []): array|string
     {
         if ($parameters !== []) {
             $path .= '?'.http_build_query($parameters);
