@@ -4,12 +4,13 @@ namespace Xvilo\OVpayApi;
 
 use Http\Client\Common\HttpMethodsClient;
 use Http\Client\Common\Plugin\AddHostPlugin;
-use Http\Client\Common\Plugin\AddPathPlugin;
 use Http\Client\Common\Plugin\HeaderAppendPlugin;
 use Http\Client\Common\Plugin\RedirectPlugin;
 use Http\Discovery\Psr17FactoryDiscovery;
 use Xvilo\OVpayApi\Api\AnonymousApi;
+use Xvilo\OVpayApi\Authentication\AuthMethod;
 use Xvilo\OVpayApi\HttpClient\HttpClientBuilder;
+use Xvilo\OVpayApi\HttpClient\Plugin\AuthMethodPlugin;
 
 class Client
 {
@@ -34,6 +35,15 @@ class Client
         return $this->anonymous;
     }
 
+    public function Authenticate(AuthMethod $method): self
+    {
+        $this->getHttpClientBuilder()
+            ->removePlugin(AuthMethodPlugin::class)
+            ->addPlugin(new AuthMethodPlugin($method));
+
+        return $this;
+    }
+
     public function getHttpClient(): HttpMethodsClient
     {
         return $this->getHttpClientBuilder()->getHttpClient();
@@ -48,13 +58,14 @@ class Client
     {
         $uri = Psr17FactoryDiscovery::findUriFactory()->createUri($this->baseHost);
 
-        $this->httpClientBuilder->addPlugin(new RedirectPlugin());
-        $this->httpClientBuilder->addPlugin(new AddHostPlugin($uri));
-        $this->httpClientBuilder->addPlugin(new HeaderAppendPlugin([
-            'Accept' => 'application/json',
-            'Accept-Language' => 'nl-NL',
-            'User-Agent' => $this->getUserAgent()
-        ]));
+        $this->httpClientBuilder
+            ->addPlugin(new RedirectPlugin())
+            ->addPlugin(new AddHostPlugin($uri))
+            ->addPlugin(new HeaderAppendPlugin([
+                'Accept' => 'application/json',
+                'Accept-Language' => 'nl-NL',
+                'User-Agent' => $this->getUserAgent()
+            ]));
     }
 
     private function getUserAgent(): string

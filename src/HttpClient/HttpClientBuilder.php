@@ -39,10 +39,11 @@ class HttpClientBuilder
     /**
      * Add a new plugin to the end of the plugin chain.
      */
-    public function addPlugin(Plugin $plugin): void
+    public function addPlugin(Plugin $plugin): self
     {
         $this->plugins[] = $plugin;
         $this->pluginClient = null;
+        return $this;
     }
 
     /**
@@ -50,7 +51,7 @@ class HttpClientBuilder
      *
      * @param string $fqcn
      */
-    public function removePlugin($fqcn): void
+    public function removePlugin($fqcn): self
     {
         foreach ($this->plugins as $idx => $plugin) {
             if ($plugin instanceof $fqcn) {
@@ -58,6 +59,8 @@ class HttpClientBuilder
                 $this->pluginClient = null;
             }
         }
+
+        return $this;
     }
 
     public function getHttpClient(): HttpMethodsClient
