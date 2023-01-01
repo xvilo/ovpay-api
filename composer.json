@@ -10,7 +10,8 @@
     "require": {
         "php": "^8.1",
         "php-http/client-common": "^2.6",
-        "php-http/discovery": "^1.14"
+        "php-http/discovery": "^1.14",
+        "lcobucci/jwt": "^4.2"
     },
     "require-dev": {
         "phpstan/phpstan": "^1.9",
