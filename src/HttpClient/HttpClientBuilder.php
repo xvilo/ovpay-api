@@ -59,6 +59,7 @@ class HttpClientBuilder
                 $this->pluginClient = null;
             }
         }
+
         return $this;
     }
 
