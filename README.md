@@ -34,7 +34,7 @@ $parser = new Parser(new JoseEncoder());
 $client = new Client();
 $client->Authenticate(new TokenMethod($parser->parse('eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIs...')));
 
-// Get trips for specified User UUID/xbot
+// Get trips for specified Card xtat UUID 
 $trips = $client->trips()->getTrips('12a12a1a-1a12-1234-1a12-1a123ab1ab12');
 // Get last trip
 $trip = end($trips['items']);
