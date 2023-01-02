@@ -6,7 +6,6 @@ namespace Xvilo\OVpayApi\Api;
 
 use Http\Client\Exception;
 use JsonException;
-use RuntimeException;
 
 final class AnonymousApi extends AbstractApi
 {

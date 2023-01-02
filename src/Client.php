@@ -8,6 +8,7 @@ use Http\Client\Common\Plugin\HeaderAppendPlugin;
 use Http\Client\Common\Plugin\RedirectPlugin;
 use Http\Discovery\Psr17FactoryDiscovery;
 use Xvilo\OVpayApi\Api\AnonymousApi;
+use Xvilo\OVpayApi\Api\TripsApi;
 use Xvilo\OVpayApi\Authentication\AuthMethod;
 use Xvilo\OVpayApi\HttpClient\HttpClientBuilder;
 use Xvilo\OVpayApi\HttpClient\Plugin\AuthMethodPlugin;
@@ -21,6 +22,8 @@ class Client
 
     private readonly AnonymousApi $anonymous;
 
+    private readonly TripsApi $trips;
+
     public function __construct(
         private readonly HttpClientBuilder $httpClientBuilder = new HttpClientBuilder(),
         private readonly string $baseHost = 'https://api.ovpay.app',
@@ -28,11 +31,17 @@ class Client
     ) {
         $this->setupHttpBuilder();
         $this->anonymous = new AnonymousApi($this);
+        $this->trips = new TripsApi($this);
     }
 
     public function anonymous(): AnonymousApi
     {
         return $this->anonymous;
+    }
+
+    public function trips(): TripsApi
+    {
+        return $this->trips;
     }
 
     public function Authenticate(AuthMethod $method): self
