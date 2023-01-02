@@ -5,8 +5,9 @@ guaranteed**.
 For now only the unauthenticated API routes are available, but more will follow. 
 
 ### TODO:
-- Add models
-- Add support for authentication, then:
-  - Add support for `Trips`
-  - Add support for `PaymentCards`
-  - Add support for `Payments`
+- [ ] Add models
+- [x] Add support for authentication, then:
+  - [ ] Add support for `Trips`
+  - [ ] Add support for `PaymentCards`
+  - [ ] Add support for `Payments`
+- [ ] Add working token refreshing logic
