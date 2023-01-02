@@ -35,8 +35,9 @@ final class HeaderMethod implements AuthMethod
     public function setToken(mixed $token): self
     {
         if (!is_string($token)) {
-            throw new InvalidArgumentException('Can only set string on ' . __CLASS__);
+            throw new InvalidArgumentException('Can only set string on ' . self::class);
         }
+
         $this->value = $token;
         return $this;
     }

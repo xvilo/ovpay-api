@@ -18,7 +18,7 @@ final class TokenMethod implements AuthMethod
 
     public function isExpired(DateTimeInterface $now = new DateTimeImmutable()): bool
     {
-        return false; //$this->token->isExpired($now);
+        return $this->token->isExpired($now);
     }
 
     public function updateRequest(RequestInterface $request): RequestInterface

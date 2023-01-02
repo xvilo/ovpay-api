@@ -25,7 +25,7 @@ class Client
 
     private readonly TripsApi $trips;
 
-    private TokensApi $tokens;
+    private readonly TokensApi $tokens;
 
     public function __construct(
         private readonly HttpClientBuilder $httpClientBuilder = new HttpClientBuilder(),
