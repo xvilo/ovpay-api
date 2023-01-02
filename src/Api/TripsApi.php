@@ -6,9 +6,9 @@ namespace Xvilo\OVpayApi\Api;
 
 final class TripsApi extends AbstractApi
 {
-    public function getTrips(string $userUuid, int $offset = 0): array
+    public function getTrips(string $cardXtatUuid, int $offset = 0): array
     {
-        return $this->get(sprintf('/api/v3/Trips/%s', $userUuid), ['offset' => $offset]);
+        return $this->get(sprintf('/api/v3/Trips/%s', $cardXtatUuid), ['offset' => $offset]);
     }
 
     public function getTrip(string $tripXbotUuid, int $tripId): array
