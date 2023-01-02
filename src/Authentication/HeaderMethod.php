@@ -9,31 +9,35 @@ use DateTimeImmutable;
 use DateTimeInterface;
 use Psr\Http\Message\RequestInterface;
 
-final class TokenMethod implements AuthMethod
+final class HeaderMethod implements AuthMethod
 {
     public function __construct(
-        private TokenInterface $token
+        private readonly string $header,
+        private string $value,
     ) {
     }
 
     public function isExpired(DateTimeInterface $now = new DateTimeImmutable()): bool
     {
-        return false; //$this->token->isExpired($now);
+        return false;
     }
 
     public function updateRequest(RequestInterface $request): RequestInterface
     {
-        return $request->withHeader('Authorization', sprintf('Bearer %s', $this->token->toString()));
+        return $request->withHeader($this->header, $this->value);
     }
 
     public function getToken(): mixed
     {
-        return $this->token;
+        return $this->value;
     }
 
     public function setToken(mixed $token): self
     {
-        $this->token = $token;
+        if (!is_string($token)) {
+            throw new InvalidArgumentException('Can only set string on ' . __CLASS__);
+        }
+        $this->value = $token;
         return $this;
     }
 }
