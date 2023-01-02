@@ -11,8 +11,8 @@ final class TripsApi extends AbstractApi
         return $this->get(sprintf('/api/v3/Trips/%s', $userUuid), ['offset' => $offset]);
     }
 
-    public function getTrip(string $userUuid, int $tripId): array
+    public function getTrip(string $tripXbotUuid, int $tripId): array
     {
-        return $this->get(sprintf('/api/v3/Trips/%s/%d', $userUuid, $tripId));
+        return $this->get(sprintf('/api/v3/Trips/%s/%d', $tripXbotUuid, $tripId));
     }
 }
