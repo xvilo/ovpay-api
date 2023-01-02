@@ -6,6 +6,16 @@ parameters:
 			path: src/Api/AnonymousApi.php
 
 		-
+			message: "#^Method Xvilo\\\\OVpayApi\\\\Api\\\\TokensApi\\:\\:getPaymentCards\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Api/TokensApi.php
+
+		-
+			message: "#^Method Xvilo\\\\OVpayApi\\\\Api\\\\TokensApi\\:\\:getPaymentCards\\(\\) should return array but returns array\\<int\\|string, mixed\\>\\|string\\.$#"
+			count: 1
+			path: src/Api/TokensApi.php
+
+		-
 			message: "#^Method Xvilo\\\\OVpayApi\\\\Api\\\\TripsApi\\:\\:getTrip\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Api/TripsApi.php
