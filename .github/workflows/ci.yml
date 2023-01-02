@@ -17,3 +17,11 @@ jobs:
       - uses: php-actions/composer@v6
         with:
           command: exec rector process
+  unit-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: php-actions/composer@v6
+      - uses: php-actions/composer@v6
+        with:
+          command: exec phpunit --no-interaction --testdox
