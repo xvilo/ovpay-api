@@ -9,7 +9,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: php-actions/composer@v6
         with:
-          command: exec rector process
+          command: exec phpstan analyse
   rector:
     runs-on: ubuntu-latest
     steps:
