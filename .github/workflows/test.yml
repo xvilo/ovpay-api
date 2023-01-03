@@ -11,3 +11,17 @@ jobs:
       - uses: php-actions/composer@v6
         with:
           command: exec phpunit
+      - name: Run phpunit tests and generate coverage
+        run: XDEBUG_MODE=coverage vendor/bin/phpunit --coverage-text --testdox --colors=never
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          directory: ./builds/reports/
+          env_vars: OS,PYTHON
+          fail_ci_if_error: true
+          files: ./build/logs/clover.xml
+          flags: unittests
+          name: codecov-umbrella
+          path_to_write_report: ./build/codecov_report.txt
+          verbose: true

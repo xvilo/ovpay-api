@@ -1,4 +1,6 @@
 ## OV Pay PHP API Wrapper
+[![codecov](https://codecov.io/gh/xvilo/ovpay-api/branch/main/graph/badge.svg?token=TTNSB24MKE)](https://codecov.io/gh/xvilo/ovpay-api)
+
 Unofficial API Wrapper for OVPay. This is a work in progress and based off an undocumented api. **stability is not 
 guaranteed**.
 
