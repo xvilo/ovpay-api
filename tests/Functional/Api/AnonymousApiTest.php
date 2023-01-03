@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Xvilo\OVpayApi\Tests\Functional\Api;
 
 use Symfony\Component\HttpClient\Response\MockResponse;
+use Xvilo\OVpayApi\Models\Notices;
 use Xvilo\OVpayApi\Tests\Functional\TestCase;
 
 final class AnonymousApiTest extends TestCase
@@ -13,7 +14,15 @@ final class AnonymousApiTest extends TestCase
         $apiClient = $this->getApiClientWithHttpClient(
             $this->getMockHttpClient(new MockResponse($this->getNoticesJsonPayload()))
         );
-        self::assertEquals(json_decode($this->getNoticesJsonPayload(), true), $apiClient->anonymous()->getNotices());
+
+        $res = $apiClient->anonymous()->getNotices();
+        self::assertInstanceOf(Notices::class, $res);
+        self::assertInstanceOf(Notices\TermsAndConditions::class, $res->getTermsAndConditions());
+        self::assertInstanceOf(Notices\PrivacyStatement::class, $res->getPrivacyStatement());
+        self::assertIsArray($res->getServiceWebsiteDisruptions());
+        self::assertIsArray($res->getOvPayAppDisruptions());
+        self::assertEmpty($res->getServiceWebsiteDisruptions());
+        self::assertEmpty($res->getOvPayAppDisruptions());
     }
 
     /**
@@ -34,7 +43,7 @@ final class AnonymousApiTest extends TestCase
             'true-in-array' => ['data' => '[true]', 'expected' => true],
             'bare-false' => ['data' => 'false', 'expected' => false],
             'false-in-array' => ['data' => '[false]', 'expected' => false],
-            'random' => ['data' => 'random-content-in-here', 'expected' => false],
+            'random' => ['data' => '{"foo": "bar"}', 'expected' => false],
         ];
     }
 }

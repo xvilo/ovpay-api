@@ -1,66 +1,36 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Method Xvilo\\\\OVpayApi\\\\Api\\\\AnonymousApi\\:\\:getNotices\\(\\) should return array\\<string, array\\<string, mixed\\>\\> but returns array\\<int\\|string, mixed\\>\\|string\\.$#"
+			message: "#^Method Xvilo\\\\OVpayApi\\\\Api\\\\AnonymousApi\\:\\:getNotices\\(\\) should return Xvilo\\\\OVpayApi\\\\Models\\\\Notices but returns object\\.$#"
 			count: 1
 			path: src/Api/AnonymousApi.php
 
 		-
-			message: "#^Method Xvilo\\\\OVpayApi\\\\Api\\\\PaymentApi\\:\\:getPayments\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Api/PaymentApi.php
-
-		-
-			message: "#^Method Xvilo\\\\OVpayApi\\\\Api\\\\PaymentApi\\:\\:getPayments\\(\\) should return array but returns array\\<int\\|string, mixed\\>\\|string\\.$#"
-			count: 1
-			path: src/Api/PaymentApi.php
-
-		-
-			message: "#^Method Xvilo\\\\OVpayApi\\\\Api\\\\PaymentApi\\:\\:getReceipt\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Api/PaymentApi.php
-
-		-
-			message: "#^Method Xvilo\\\\OVpayApi\\\\Api\\\\PaymentApi\\:\\:getReceipt\\(\\) should return array but returns array\\<int\\|string, mixed\\>\\|string\\.$#"
-			count: 1
-			path: src/Api/PaymentApi.php
-
-		-
-			message: "#^Parameter \\#2 \\$parameters of method Xvilo\\\\OVpayApi\\\\Api\\\\AbstractApi\\:\\:get\\(\\) expects array\\<string, string\\>, array\\<string, int\\> given\\.$#"
-			count: 1
-			path: src/Api/PaymentApi.php
-
-		-
-			message: "#^Method Xvilo\\\\OVpayApi\\\\Api\\\\TokensApi\\:\\:getPaymentCards\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Api/TokensApi.php
-
-		-
-			message: "#^Method Xvilo\\\\OVpayApi\\\\Api\\\\TokensApi\\:\\:getPaymentCards\\(\\) should return array but returns array\\<int\\|string, mixed\\>\\|string\\.$#"
-			count: 1
-			path: src/Api/TokensApi.php
-
-		-
-			message: "#^Method Xvilo\\\\OVpayApi\\\\Api\\\\TripsApi\\:\\:getTrip\\(\\) return type has no value type specified in iterable type array\\.$#"
+			message: "#^Method Xvilo\\\\OVpayApi\\\\Api\\\\TripsApi\\:\\:getTrip\\(\\) should return Xvilo\\\\OVpayApi\\\\Models\\\\Receipt\\\\ReceiptTrip but returns object\\.$#"
 			count: 1
 			path: src/Api/TripsApi.php
 
 		-
-			message: "#^Method Xvilo\\\\OVpayApi\\\\Api\\\\TripsApi\\:\\:getTrip\\(\\) should return array but returns array\\<int\\|string, mixed\\>\\|string\\.$#"
+			message: "#^Method Xvilo\\\\OVpayApi\\\\Models\\\\Payments\\:\\:getItems\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
-			path: src/Api/TripsApi.php
+			path: src/Models/Payments.php
 
 		-
-			message: "#^Method Xvilo\\\\OVpayApi\\\\Api\\\\TripsApi\\:\\:getTrips\\(\\) return type has no value type specified in iterable type array\\.$#"
+			message: "#^Method Xvilo\\\\OVpayApi\\\\Models\\\\Receipt\\:\\:__construct\\(\\) has parameter \\$relatedBalances with no value type specified in iterable type array\\.$#"
 			count: 1
-			path: src/Api/TripsApi.php
+			path: src/Models/Receipt.php
 
 		-
-			message: "#^Method Xvilo\\\\OVpayApi\\\\Api\\\\TripsApi\\:\\:getTrips\\(\\) should return array but returns array\\<int\\|string, mixed\\>\\|string\\.$#"
+			message: "#^Method Xvilo\\\\OVpayApi\\\\Models\\\\Receipt\\:\\:getRelatedBalances\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
-			path: src/Api/TripsApi.php
+			path: src/Models/Receipt.php
 
 		-
-			message: "#^Parameter \\#2 \\$parameters of method Xvilo\\\\OVpayApi\\\\Api\\\\AbstractApi\\:\\:get\\(\\) expects array\\<string, string\\>, array\\<string, int\\> given\\.$#"
+			message: "#^Method Xvilo\\\\OVpayApi\\\\Models\\\\Receipt\\\\ReceiptTrip\\:\\:__construct\\(\\) has parameter \\$correctionOptions with no value type specified in iterable type array\\.$#"
 			count: 1
-			path: src/Api/TripsApi.php
+			path: src/Models/Receipt/ReceiptTrip.php
+
+		-
+			message: "#^Method Xvilo\\\\OVpayApi\\\\Models\\\\Receipt\\\\ReceiptTrip\\:\\:getCorrectionOptions\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Models/Receipt/ReceiptTrip.php

@@ -6,6 +6,9 @@ namespace Xvilo\OVpayApi\Tests\Functional\Api;
 use Symfony\Component\HttpClient\Response\MockResponse;
 use Xvilo\OVpayApi\Authentication\HeaderMethod;
 use Xvilo\OVpayApi\Exception\UnauthorizedException;
+use Xvilo\OVpayApi\Models\Payment;
+use Xvilo\OVpayApi\Models\Payments;
+use Xvilo\OVpayApi\Models\Receipt\ReceiptTrip;
 use Xvilo\OVpayApi\Tests\Functional\TestCase;
 
 final class PaymentApiTest extends TestCase
@@ -16,12 +19,16 @@ final class PaymentApiTest extends TestCase
             return $this->isAuthenticatedRequest($options['normalized_headers'], $this->getPaymentsData());
         }));
         $apiClient->Authenticate(new HeaderMethod('Authorization', 'Bearer TEST'));
+        $result = $apiClient->payment()->getPayments('2af820fb-30a4-48fe-881e-21521c94a95e');
 
-        $this->assertEquals(
-            json_decode($this->getPaymentsData(), true),
-            $apiClient->payment()->getPayments('2af820fb-30a4-48fe-881e-21521c94a95e')
-        );
+        self::assertInstanceOf(Payments::class, $result);
+        self::assertTrue($result->isEndOfListReached());
+        self::assertEquals(3, $result->getOffset());
+        self::assertNotEmpty($result->getItems());
+        self::assertCount(1, $result->getItems());
+        self::assertInstanceOf(Payment::class, $result->getItems()[0]);
     }
+
     public function testGetPaymentsNoAuth(): void
     {
         $this->expectException(UnauthorizedException::class);
@@ -42,10 +49,14 @@ final class PaymentApiTest extends TestCase
         }));
         $apiClient->Authenticate(new HeaderMethod('Authorization', 'Bearer TEST'));
 
-        $this->assertEquals(
-            json_decode($this->getReceiptsData(), true),
-            $apiClient->payment()->getReceipt('f7386e11-1142-47a9-bf61-39ac6825588e', 'EVENT-O12-12345678901234567890123456789')
-        );
+        $result = $apiClient->payment()->getReceipt('f7386e11-1142-47a9-bf61-39ac6825588e', 'EVENT-O12-12345678901234567890123456789');
+        self::assertNotEmpty($result->getPayments());
+        self::assertCount(1, $result->getPayments());
+        self::assertInstanceOf(Payment::class, $result->getPayments()[0]);
+
+        self::assertNotEmpty($result->getTrips());
+        self::assertCount(1, $result->getTrips());
+        self::assertInstanceOf(ReceiptTrip::class, $result->getTrips()[0]);
     }
 
     public function testGetReceiptNoAuth(): void
