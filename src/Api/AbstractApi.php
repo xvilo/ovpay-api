@@ -30,11 +30,9 @@ abstract class AbstractApi
             $path .= '?'.http_build_query($parameters);
         }
 
-        $response = $this->client->getHttpClient()->get($path, $requestHeaders);
-        try {
-            return (array) json_decode($response->getBody()->getContents(), true, 512, JSON_THROW_ON_ERROR);
-        } catch (JsonException) {
-            return $response->getBody()->getContents();
-        }
+        return $this->client->getHttpClient()
+            ->get($path, $requestHeaders)
+            ->getBody()
+            ->getContents();
     }
 }

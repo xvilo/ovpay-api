@@ -6,6 +6,7 @@ namespace Xvilo\OVpayApi\Api;
 
 use Http\Client\Exception;
 use JsonException;
+use Xvilo\OVpayApi\Models\Notices;
 
 final class AnonymousApi extends AbstractApi
 {
@@ -14,13 +15,18 @@ final class AnonymousApi extends AbstractApi
      * @throws Exception
      * @throws JsonException
      */
-    public function getNotices(): array
+    public function getNotices(): Notices
     {
-        return $this->get('/api/anonymous/v1/Notices');
+        return $this->client->getSerializer()->deserialize(
+            $this->get('/api/anonymous/v1/Notices'),
+            Notices::class,
+            'json'
+        );
     }
 
     public function isRegistrationOpen(): bool
     {
-        return $this->get('/api/anonymous/v1/PassengerAccounts/RegistrationOpen') === [true];
+        $dat = json_decode($this->get('/api/anonymous/v1/PassengerAccounts/RegistrationOpen'), true);
+        return $dat === true || $dat === [true];
     }
 }
