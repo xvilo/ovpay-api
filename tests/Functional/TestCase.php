@@ -121,6 +121,32 @@ JSON;
 
     }
 
+    public function getPaymentsData(): string
+    {
+        return <<<JSON
+{
+  "offset": 3,
+  "endOfListReached": true,
+  "items": [
+    {
+      "serviceReferenceId": "1234ABCD5678EF",
+      "xbot": "f7386e11-1142-47a9-bf61-39ac6825588e",
+      "id": "EVENT-O12-12345678901234567890123456789",
+      "status": "Ok",
+      "transactionTimestamp": "2023-01-01T03:25:59+01:00",
+      "transactionType": "Trip",
+      "amount": -1080,
+      "amountDue": -1080,
+      "currency": "EUR",
+      "paymentMethod": "EMV",
+      "rejectionReason": null,
+      "loyaltyOrDiscount": false
+    }
+  ]
+}
+JSON;
+    }
+
     protected function isAuthenticatedRequest(array $normalized_headers, string $returnData): MockResponse
     {
         $authHeader = ($normalized_headers['authorization'] ?? []);
