@@ -5,7 +5,10 @@ namespace Xvilo\OVpayApi\Tests;
 
 use Http\Client\HttpClient;
 use PHPUnit\Framework\TestCase as BaseTestCase;
+use Symfony\Component\HttpClient\HttplugClient;
+use Symfony\Component\HttpClient\MockHttpClient;
 use Symfony\Component\HttpClient\Response\MockResponse;
+use Symfony\Contracts\HttpClient\ResponseInterface;
 use Xvilo\OVpayApi\Client;
 use Xvilo\OVpayApi\HttpClient\HttpClientBuilder;
 
@@ -14,6 +17,14 @@ abstract class TestCase extends BaseTestCase
     protected function getApiClientWithHttpClient(HttpClient $httpClient): Client
     {
         return new Client(new HttpClientBuilder($httpClient));
+    }
+
+    /**
+     * @param callable|callable[]|ResponseInterface|ResponseInterface[]|iterable|null $responseFactory
+     */
+    protected function getMockHttpClient(callable|ResponseInterface|iterable|null $responseFactory = null): HttpClient
+    {
+        return new HttplugClient(new MockHttpClient($responseFactory));
     }
 
     protected function getExampleCard(

@@ -3,20 +3,16 @@ declare(strict_types=1);
 
 namespace Xvilo\OVpayApi\Tests\Api;
 
-use Symfony\Component\HttpClient\HttplugClient;
-use Symfony\Component\HttpClient\MockHttpClient;
 use Symfony\Component\HttpClient\Response\MockResponse;
-use Xvilo\OVpayApi\Authentication\HeaderMethod;
 use Xvilo\OVpayApi\Tests\TestCase;
 
 final class AnonymousApiTest extends TestCase
 {
     public function testGetNotices(): void
     {
-        $client = new HttplugClient(new MockHttpClient([
-            new MockResponse($this->getNoticesJsonPayload())
-        ]));
-        $apiClient = $this->getApiClientWithHttpClient($client);
+        $apiClient = $this->getApiClientWithHttpClient(
+            $this->getMockHttpClient(new MockResponse($this->getNoticesJsonPayload()))
+        );
         self::assertEquals(json_decode($this->getNoticesJsonPayload(), true), $apiClient->anonymous()->getNotices());
     }
 
@@ -25,10 +21,9 @@ final class AnonymousApiTest extends TestCase
      */
     public function testIsRegistrationOpen(string $data, bool $expected): void
     {
-        $client = new HttplugClient(new MockHttpClient([
-            new MockResponse($data)
-        ]));
-        $apiClient = $this->getApiClientWithHttpClient($client);
+        $apiClient = $this->getApiClientWithHttpClient(
+            $this->getMockHttpClient(new MockResponse($data))
+        );
         self::assertEquals($expected, $apiClient->anonymous()->isRegistrationOpen());
     }
 
