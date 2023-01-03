@@ -20,7 +20,7 @@ jobs:
           directory: ./builds/reports/
           env_vars: OS,PYTHON
           fail_ci_if_error: true
-          files: ./build/cobertura.xml
+          files: ./build/logs/clover.xml
           flags: unittests
           name: codecov-umbrella
           path_to_write_report: ./build/codecov_report.txt
