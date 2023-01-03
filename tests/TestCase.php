@@ -38,6 +38,25 @@ abstract class TestCase extends BaseTestCase
 JSON;
     }
 
+    protected function getNoticesJsonPayload(): string
+    {
+        return <<<JSON
+{
+  "serviceWebsiteDisruptions": [],
+  "ovPayAppDisruptions": [],
+  "termsAndConditions": {
+    "lastModified": "2022-12-19T00:00:00+01:00",
+    "highlights": []
+  },
+  "privacyStatement": {
+    "lastModified": "2022-12-19T00:00:00+01:00",
+    "highlights": []
+  }
+}
+JSON;
+
+    }
+
     protected function isAuthenticatedRequest(array $normalized_headers, string $returnData): MockResponse
     {
         $authHeader = ($normalized_headers['authorization'] ?? []);

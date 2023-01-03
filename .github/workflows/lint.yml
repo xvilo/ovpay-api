@@ -8,7 +8,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: php-actions/composer@v6
-      - uses: php-actions/phpstan@v3
+        with:
+          command: exec rector process
   rector:
     runs-on: ubuntu-latest
     steps:
