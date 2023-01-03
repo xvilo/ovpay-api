@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xvilo\OVpayApi;
 
 use Http\Client\Common\HttpMethodsClient;
@@ -14,6 +16,7 @@ use Xvilo\OVpayApi\Api\TripsApi;
 use Xvilo\OVpayApi\Authentication\AuthMethod;
 use Xvilo\OVpayApi\HttpClient\HttpClientBuilder;
 use Xvilo\OVpayApi\HttpClient\Plugin\AuthMethodPlugin;
+use Xvilo\OVpayApi\HttpClient\Plugin\ExceptionThrower;
 use Xvilo\OVpayApi\Tests\Functional\Api\PaymentApiTest;
 
 class Client
@@ -89,6 +92,7 @@ class Client
         $this->httpClientBuilder
             ->addPlugin(new RedirectPlugin())
             ->addPlugin(new AddHostPlugin($uri))
+            ->addPlugin(new ExceptionThrower())
             ->addPlugin(new HeaderAppendPlugin([
                 'Accept' => 'application/json',
                 'Accept-Language' => 'nl-NL',
