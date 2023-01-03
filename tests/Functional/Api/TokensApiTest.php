@@ -18,4 +18,13 @@ final class TokensApiTest extends TestCase
 
         $this->assertEquals(json_decode($this->getExampleCard(), true), $apiClient->tokens()->getPaymentCards());
     }
+
+    public function testGetCardsNoAuth(): void
+    {
+        $apiClient = $this->getApiClientWithHttpClient($this->getMockHttpClient(function ($method, $url, $options): MockResponse {
+            return $this->isAuthenticatedRequest($options['normalized_headers'], $this->getExampleCard());
+        }));
+
+        $apiClient->tokens()->getPaymentCards();
+    }
 }

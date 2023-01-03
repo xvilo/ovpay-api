@@ -19,7 +19,16 @@ final class TripsApiTest extends TestCase
         $this->assertEquals(json_decode($this->getTripsData(), true), $apiClient->trips()->getTrips('2af820fb-30a4-48fe-881e-21521c94a95e'));
     }
 
-    public function testGgetTrip(): void
+    public function testGetTripsNoAuth(): void
+    {
+        $apiClient = $this->getApiClientWithHttpClient($this->getMockHttpClient(function ($method, $url, $options): MockResponse {
+            return $this->isAuthenticatedRequest($options['normalized_headers'], $this->getTripsData());
+        }));
+
+        $apiClient->trips()->getTrips('2af820fb-30a4-48fe-881e-21521c94a95e');
+    }
+
+    public function testGetTrip(): void
     {
         $apiClient = $this->getApiClientWithHttpClient($this->getMockHttpClient(function ($method, $url, $options): MockResponse {
             return $this->isAuthenticatedRequest($options['normalized_headers'], $this->getTripData());
@@ -27,5 +36,14 @@ final class TripsApiTest extends TestCase
         $apiClient->Authenticate(new HeaderMethod('Authorization', 'Bearer TEST'));
 
         $this->assertEquals(json_decode($this->getTripData(), true), $apiClient->trips()->getTrip('2af820fb-30a4-48fe-881e-21521c94a95e', 12345678));
+    }
+
+    public function testGetTripNoAuth(): void
+    {
+        $apiClient = $this->getApiClientWithHttpClient($this->getMockHttpClient(function ($method, $url, $options): MockResponse {
+            return $this->isAuthenticatedRequest($options['normalized_headers'], $this->getTripData());
+        }));
+
+        $apiClient->trips()->getTrip('2af820fb-30a4-48fe-881e-21521c94a95e', 12345678);
     }
 }
