@@ -11,9 +11,9 @@ For now only the unauthenticated API routes are available, but more will follow.
 - [x] Add support for authentication, then:
   - [x] Add support for `Trips`
   - [x] Add support for `PaymentCards`
-  - [ ] Add support for `Payments`
+  - [x] Add support for `Payments`
 - [ ] Add working token refreshing logic
-
+- [ ] Add better error response handling
 ### Example:
 
 Request trips, then request trip details:
