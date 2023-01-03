@@ -127,24 +127,58 @@ JSON;
 {
   "offset": 3,
   "endOfListReached": true,
-  "items": [
-    {
-      "serviceReferenceId": "1234ABCD5678EF",
-      "xbot": "f7386e11-1142-47a9-bf61-39ac6825588e",
-      "id": "EVENT-O12-12345678901234567890123456789",
-      "status": "Ok",
-      "transactionTimestamp": "2023-01-01T03:25:59+01:00",
-      "transactionType": "Trip",
-      "amount": -1080,
-      "amountDue": -1080,
-      "currency": "EUR",
-      "paymentMethod": "EMV",
-      "rejectionReason": null,
-      "loyaltyOrDiscount": false
-    }
-  ]
+  "items": [{$this->getSinglePaymentItem()}]
 }
 JSON;
+    }
+
+    private function getSinglePaymentItem(): string
+    {
+        return <<<JSON
+{
+    "serviceReferenceId": "1234ABCD5678EF",
+    "xbot": "f7386e11-1142-47a9-bf61-39ac6825588e",
+    "id": "EVENT-O12-12345678901234567890123456789",
+    "status": "Ok",
+    "transactionTimestamp": "2023-01-01T03:25:59+01:00",
+    "transactionType": "Trip",
+    "amount": -1080,
+    "amountDue": -1080,
+    "currency": "EUR",
+    "paymentMethod": "EMV",
+    "rejectionReason": null,
+    "loyaltyOrDiscount": false
+}
+JSON;
+    }
+
+    protected function getReceiptsData(): string
+    {
+        return <<<JSON
+{
+  "relatedPayments": [{$this->getSinglePaymentItem()}],
+  "relatedTrips": [
+    {
+      "correctionOptions": null,
+      "trip": {$this->getTrip()},
+      "correctedFrom": null,
+      "correctedFromType": null
+    }
+  ],
+  "relatedBalances": [],
+  "token": {
+    "mediumType": "Emv",
+    "xbot": "3f71d274-45f0-4b26-a628-7b7853301e89",
+    "status": "Active",
+    "personalization": {
+      "name": "",
+      "color": "Pink",
+      "medium": "PhysicalCard"
+    }
+  }
+}
+JSON;
+
     }
 
     protected function isAuthenticatedRequest(array $normalized_headers, string $returnData): MockResponse

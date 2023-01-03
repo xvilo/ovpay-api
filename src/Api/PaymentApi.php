@@ -10,4 +10,9 @@ final class PaymentApi extends AbstractApi
     {
         return $this->get(sprintf('/api/v1/Payments/%s', $cardXtatUuid), ['offset' => 0]);
     }
+
+    public function getReceipt(string $paymentXbot, string $paymentId): array
+    {
+        return $this->get(sprintf('/api/v1/Payments/receipt/%s/%s', $paymentXbot, $paymentId));
+    }
 }
