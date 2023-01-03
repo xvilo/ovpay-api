@@ -12,6 +12,7 @@ final class Token
         private readonly string $xbot,
         private readonly string $status,
         private readonly TokenPersonalization $personalization,
+        private readonly ?string $xtat = null,
     ) {
     }
 
@@ -33,5 +34,10 @@ final class Token
     public function getPersonalization(): TokenPersonalization
     {
         return $this->personalization;
+    }
+
+    public function getXtat(): ?string
+    {
+        return $this->xtat;
     }
 }
