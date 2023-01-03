@@ -7,15 +7,15 @@ use DateTimeImmutable;
 
 final class PrivacyStatement
 {
+    /**
+     * @param array<int|string, mixed> $highlights
+     */
     public function __construct(
         private readonly DateTimeImmutable $lastModified,
         private readonly array $highlights
     ) {
     }
 
-    /**
-     * @return DateTimeImmutable
-     */
     public function getLastModified(): DateTimeImmutable
     {
         return $this->lastModified;

@@ -8,6 +8,10 @@ use Xvilo\OVpayApi\Models\Notices\TermsAndConditions;
 
 final class Notices
 {
+    /**
+     * @param array<int|string, mixed> $serviceWebsiteDisruptions
+     * @param array<int|string, mixed> $ovPayAppDisruptions
+     */
     public function __construct(
         private readonly array $serviceWebsiteDisruptions,
         private readonly array $ovPayAppDisruptions,
@@ -32,17 +36,11 @@ final class Notices
         return $this->ovPayAppDisruptions;
     }
 
-    /**
-     * @return TermsAndConditions
-     */
     public function getTermsAndConditions(): TermsAndConditions
     {
         return $this->termsAndConditions;
     }
 
-    /**
-     * @return PrivacyStatement
-     */
     public function getPrivacyStatement(): PrivacyStatement
     {
         return $this->privacyStatement;
