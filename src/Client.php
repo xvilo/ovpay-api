@@ -19,7 +19,7 @@ class Client
     /**
      * @var string
      */
-    final public const VERSION = '0.0.2';
+    final public const VERSION = '0.2.0';
 
     private readonly AnonymousApi $anonymous;
 
