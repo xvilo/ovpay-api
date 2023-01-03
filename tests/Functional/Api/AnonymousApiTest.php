@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Xvilo\OVpayApi\Tests\Api;
+namespace Xvilo\OVpayApi\Tests\Functional\Api;
 
 use Symfony\Component\HttpClient\Response\MockResponse;
-use Xvilo\OVpayApi\Tests\TestCase;
+use Xvilo\OVpayApi\Tests\Functional\TestCase;
 
 final class AnonymousApiTest extends TestCase
 {
