@@ -17,17 +17,11 @@ final class Trips
     ) {
     }
 
-    /**
-     * @return int
-     */
     public function getOffset(): int
     {
         return $this->offset;
     }
 
-    /**
-     * @return bool
-     */
     public function isEndOfListReached(): bool
     {
         return $this->endOfListReached;

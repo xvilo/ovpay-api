@@ -15,25 +15,16 @@ final class TripsItem
     ) {
     }
 
-    /**
-     * @return Trip
-     */
     public function getTrip(): Trip
     {
         return $this->trip;
     }
 
-    /**
-     * @return DateTimeImmutable|null
-     */
     public function getCorrectedFrom(): ?DateTimeImmutable
     {
         return $this->correctedFrom;
     }
 
-    /**
-     * @return mixed
-     */
     public function getCorrectedFromType(): mixed
     {
         return $this->correctedFromType;

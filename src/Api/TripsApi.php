@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Xvilo\OVpayApi\Api;
 
+use Xvilo\OVpayApi\Models\Receipt\ReceiptTrip;
 use Xvilo\OVpayApi\Models\Trips;
 
 final class TripsApi extends AbstractApi
@@ -18,7 +19,7 @@ final class TripsApi extends AbstractApi
         );
 
         $trips->setItems($this->client->getSerializer()->deserialize(
-            json_encode($trips->getItems()),
+            json_encode($trips->getItems(), JSON_THROW_ON_ERROR),
             Trips\TripsItem::class . '[]',
             'json'
         ));
@@ -26,8 +27,12 @@ final class TripsApi extends AbstractApi
         return $trips;
     }
 
-    public function getTrip(string $tripXbotUuid, int $tripId): array
+    public function getTrip(string $tripXbotUuid, int $tripId): ReceiptTrip
     {
-        return $this->get(sprintf('/api/v3/Trips/%s/%d', $tripXbotUuid, $tripId));
+        return $this->client->getSerializer()->deserialize(
+            $this->get(sprintf('/api/v3/Trips/%s/%d', $tripXbotUuid, $tripId)),
+            ReceiptTrip::class,
+            'json'
+        );
     }
 }
