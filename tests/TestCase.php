@@ -27,6 +27,66 @@ abstract class TestCase extends BaseTestCase
         return new HttplugClient(new MockHttpClient($responseFactory));
     }
 
+    protected function getTripsData(): string
+    {
+        return <<<JSON
+{
+  "offset": 20,
+  "endOfListReached": true,
+  "items": [
+    {
+      "trip": {$this->getTrip()},
+      "correctedFrom": null,
+      "correctedFromType": null
+    }
+  ]
+}
+JSON;
+    }
+
+    protected function getTripData(): string
+    {
+        return <<<JSON
+{
+  "token": {
+    "mediumType": "Emv",
+    "xbot": "13fa524a-14e3-4fb4-ba28-cbc56bac45ea",
+    "status": "Active",
+    "personalization": {
+      "name": "",
+      "color": "Pink",
+      "medium": "PhysicalCard"
+    }
+  },
+  "correctionOptions": null,
+  "trip": {$this->getTrip()},
+  "correctedFrom": null,
+  "correctedFromType": null
+}
+JSON;
+    }
+
+    protected function getTrip(): string
+    {
+        return <<<JSON
+{
+    "xbot": "fac5b73b-54e6-4fc4-ab24-7249481c0fdb",
+    "id": 12345678,
+    "version": 1,
+    "transport": "RAIL",
+    "status": "COMPLETE",
+    "checkInLocation": "Utrecht Centraal",
+    "checkInTimestamp": "2022-12-30T13:37:00+01:00",
+    "checkOutLocation": "Utrecht Centraal",
+    "checkOutTimestamp": "2022-12-30T14:37:00+01:00",
+    "currency": "EUR",
+    "fare": 0,
+    "organisationName": "NS",
+    "loyaltyOrDiscount": false
+}
+JSON;
+    }
+
     protected function getExampleCard(
         string $mediumType = 'Emv',
         string $status = 'Active'
