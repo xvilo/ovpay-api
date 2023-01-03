@@ -16,7 +16,7 @@ abstract class AbstractApi
     }
 
     /**
-     * @param array<string, string> $parameters
+     * @param array<string, string|int> $parameters
      * @param array<string, string> $requestHeaders
      *
      * @throws JsonException
