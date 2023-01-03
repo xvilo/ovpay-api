@@ -5,6 +5,7 @@ namespace Xvilo\OVpayApi\Tests\Functional\Api;
 
 use Symfony\Component\HttpClient\Response\MockResponse;
 use Xvilo\OVpayApi\Authentication\HeaderMethod;
+use Xvilo\OVpayApi\Exception\UnauthorizedException;
 use Xvilo\OVpayApi\Tests\Functional\TestCase;
 
 final class PaymentApiTest extends TestCase
@@ -23,6 +24,10 @@ final class PaymentApiTest extends TestCase
     }
     public function testGetPaymentsNoAuth(): void
     {
+        $this->expectException(UnauthorizedException::class);
+        $this->expectExceptionMessage('Unauthorized');
+        $this->expectExceptionCode(401);
+
         $apiClient = $this->getApiClientWithHttpClient($this->getMockHttpClient(function ($method, $url, $options): MockResponse {
             return $this->isAuthenticatedRequest($options['normalized_headers'], $this->getPaymentsData());
         }));
@@ -45,6 +50,10 @@ final class PaymentApiTest extends TestCase
 
     public function testGetReceiptNoAuth(): void
     {
+        $this->expectException(UnauthorizedException::class);
+        $this->expectExceptionMessage('Unauthorized');
+        $this->expectExceptionCode(401);
+
         $apiClient = $this->getApiClientWithHttpClient($this->getMockHttpClient(function ($method, $url, $options): MockResponse {
             return $this->isAuthenticatedRequest($options['normalized_headers'], $this->getReceiptsData());
         }));
