@@ -1,6 +1,7 @@
 {
     "name": "xvilo/ovpay-api",
     "description": "OVpay API client written in PHP",
+    "license": "Apache-2.0",
     "type": "library",
     "autoload": {
         "psr-4": {
