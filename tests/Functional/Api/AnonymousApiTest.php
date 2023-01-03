@@ -43,7 +43,7 @@ final class AnonymousApiTest extends TestCase
             'true-in-array' => ['data' => '[true]', 'expected' => true],
             'bare-false' => ['data' => 'false', 'expected' => false],
             'false-in-array' => ['data' => '[false]', 'expected' => false],
-            'random' => ['data' => 'random-content-in-here', 'expected' => false],
+            'random' => ['data' => '{"foo": "bar"}', 'expected' => false],
         ];
     }
 }
