@@ -23,7 +23,7 @@ final class TripsApiTest extends TestCase
     public function testGetTripsNoAuth(): void
     {
         $this->expectException(UnauthorizedException::class);
-        $this->expectExceptionMessage('Unauthorized');
+        $this->expectExceptionMessage('Unauthorized. Either no credentials where provided, or the credentials have expired.');
         $this->expectExceptionCode(401);
 
         $apiClient = $this->getApiClientWithHttpClient($this->getMockHttpClient(function ($method, $url, $options): MockResponse {
@@ -46,7 +46,7 @@ final class TripsApiTest extends TestCase
     public function testGetTripNoAuth(): void
     {
         $this->expectException(UnauthorizedException::class);
-        $this->expectExceptionMessage('Unauthorized');
+        $this->expectExceptionMessage('Unauthorized. Either no credentials where provided, or the credentials have expired.');
         $this->expectExceptionCode(401);
 
         $apiClient = $this->getApiClientWithHttpClient($this->getMockHttpClient(function ($method, $url, $options): MockResponse {

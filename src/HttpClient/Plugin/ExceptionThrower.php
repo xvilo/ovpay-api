@@ -17,13 +17,13 @@ final class ExceptionThrower implements Plugin
      */
     public function handleRequest(RequestInterface $request, callable $next, callable $first): Promise
     {
-        return $next($request)->then(function (ResponseInterface $response) use ($request) {
+        return $next($request)->then(static function (ResponseInterface $response): ResponseInterface {
             if ($response->getStatusCode() < 400 || $response->getStatusCode() > 600) {
                 return $response;
             }
 
             if ($response->getStatusCode() === 401) {
-                throw new UnauthorizedException();
+                throw new UnauthorizedException('Unauthorized. Either no credentials where provided, or the credentials have expired.');
             }
 
             throw new RuntimeException('Something unexpected happend.', $response->getStatusCode());

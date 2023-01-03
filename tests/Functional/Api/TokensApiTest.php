@@ -23,7 +23,7 @@ final class TokensApiTest extends TestCase
     public function testGetCardsNoAuth(): void
     {
         $this->expectException(UnauthorizedException::class);
-        $this->expectExceptionMessage('Unauthorized');
+        $this->expectExceptionMessage('Unauthorized. Either no credentials where provided, or the credentials have expired.');
         $this->expectExceptionCode(401);
 
         $apiClient = $this->getApiClientWithHttpClient($this->getMockHttpClient(function ($method, $url, $options): MockResponse {

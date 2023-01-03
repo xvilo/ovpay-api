@@ -25,7 +25,7 @@ final class PaymentApiTest extends TestCase
     public function testGetPaymentsNoAuth(): void
     {
         $this->expectException(UnauthorizedException::class);
-        $this->expectExceptionMessage('Unauthorized');
+        $this->expectExceptionMessage('Unauthorized. Either no credentials where provided, or the credentials have expired.');
         $this->expectExceptionCode(401);
 
         $apiClient = $this->getApiClientWithHttpClient($this->getMockHttpClient(function ($method, $url, $options): MockResponse {
@@ -51,7 +51,7 @@ final class PaymentApiTest extends TestCase
     public function testGetReceiptNoAuth(): void
     {
         $this->expectException(UnauthorizedException::class);
-        $this->expectExceptionMessage('Unauthorized');
+        $this->expectExceptionMessage('Unauthorized. Either no credentials where provided, or the credentials have expired.');
         $this->expectExceptionCode(401);
 
         $apiClient = $this->getApiClientWithHttpClient($this->getMockHttpClient(function ($method, $url, $options): MockResponse {
