@@ -8,8 +8,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: php-actions/composer@v6
-        with:
-          command: exec phpstan analyse
+      - uses: php-actions/phpstan@v3
   rector:
     runs-on: ubuntu-latest
     steps:
