@@ -17,10 +17,16 @@
         </testsuite>
     </testsuites>
 
-    <coverage cacheDirectory=".phpunit.cache/code-coverage"
-              processUncoveredFiles="true">
+    <coverage processUncoveredFiles="true">
         <include>
             <directory suffix=".php">src</directory>
         </include>
+
+        <report>
+            <cobertura outputFile="build/cobertura.xml"/>
+            <html outputDirectory="build/coverage" lowUpperBound="40" highLowerBound="75"/>
+            <clover outputFile="build/logs/clover.xml"/>
+        </report>
     </coverage>
+
 </phpunit>
