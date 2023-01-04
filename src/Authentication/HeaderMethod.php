@@ -1,10 +1,10 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Xvilo\OVpayApi\Authentication;
 
 use InvalidArgumentException;
-use Lcobucci\JWT\Token as TokenInterface;
 use DateTimeImmutable;
 use DateTimeInterface;
 use Psr\Http\Message\RequestInterface;

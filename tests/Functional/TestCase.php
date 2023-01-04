@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Xvilo\OVpayApi\Tests\Functional;
@@ -80,8 +81,7 @@ JSON;
     protected function getExampleCard(
         string $mediumType = 'Emv',
         string $status = 'Active'
-    ): string
-    {
+    ): string {
         return <<<JSON
 [
     {
@@ -115,7 +115,6 @@ JSON;
   }
 }
 JSON;
-
     }
 
     public function getPaymentsData(): string
@@ -175,7 +174,6 @@ JSON;
   }
 }
 JSON;
-
     }
 
     protected function isAuthenticatedRequest(array $normalized_headers, string $returnData): MockResponse

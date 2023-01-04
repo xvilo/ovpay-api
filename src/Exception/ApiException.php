@@ -11,5 +11,4 @@ use RuntimeException;
  */
 final class ApiException extends RuntimeException implements OVPayApiException
 {
-
 }

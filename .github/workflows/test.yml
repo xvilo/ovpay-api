@@ -8,9 +8,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: php-actions/composer@v6
-      - uses: php-actions/composer@v6
-        with:
-          command: exec phpunit
       - name: Run phpunit tests and generate coverage
         run: XDEBUG_MODE=coverage vendor/bin/phpunit --coverage-text --testdox --colors=never
       - name: Upload coverage to Codecov

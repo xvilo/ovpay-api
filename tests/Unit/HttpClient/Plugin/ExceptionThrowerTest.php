@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Xvilo\OVpayApi\Tests\Unit\HttpClient\Plugin;
@@ -26,8 +27,8 @@ final class ExceptionThrowerTest extends TestCase
         $plugin = new ExceptionThrower();
         $result = $plugin->handleRequest(
             $request,
-            static fn(RequestInterface $request): \Http\Client\Promise\HttpFulfilledPromise => $promise,
-            static fn(RequestInterface $request): \Http\Client\Promise\HttpFulfilledPromise => $promise
+            static fn (RequestInterface $request): \Http\Client\Promise\HttpFulfilledPromise => $promise,
+            static fn (RequestInterface $request): \Http\Client\Promise\HttpFulfilledPromise => $promise
         );
 
         $result->wait();

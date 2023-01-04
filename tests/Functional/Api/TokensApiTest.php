@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Xvilo\OVpayApi\Tests\Functional\Api;
@@ -14,7 +15,7 @@ final class TokensApiTest extends TestCase
     public function testGetCards(): void
     {
         $apiClient = $this->getApiClientWithHttpClient($this->getMockHttpClient(
-            fn($method, $url, $options): MockResponse => $this->isAuthenticatedRequest($options['normalized_headers'], $this->getExampleCard())
+            fn ($method, $url, $options): MockResponse => $this->isAuthenticatedRequest($options['normalized_headers'], $this->getExampleCard())
         ));
         $apiClient->Authenticate(new HeaderMethod('Authorization', 'Bearer TEST'));
 
@@ -34,7 +35,7 @@ final class TokensApiTest extends TestCase
         $this->expectExceptionCode(401);
 
         $apiClient = $this->getApiClientWithHttpClient($this->getMockHttpClient(
-            fn($method, $url, $options): MockResponse => $this->isAuthenticatedRequest($options['normalized_headers'], $this->getExampleCard())
+            fn ($method, $url, $options): MockResponse => $this->isAuthenticatedRequest($options['normalized_headers'], $this->getExampleCard())
         ));
 
         $apiClient->tokens()->getPaymentCards();
