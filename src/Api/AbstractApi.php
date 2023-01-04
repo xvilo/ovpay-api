@@ -17,7 +17,7 @@ abstract class AbstractApi
 
     /**
      * @param array<string, string|int> $parameters
-     * @param array<string, string> $requestHeaders
+     * @param array<string, string>     $requestHeaders
      *
      * @throws JsonException
      * @throws Exception
@@ -25,7 +25,7 @@ abstract class AbstractApi
     protected function get(string $path, array $parameters = [], array $requestHeaders = []): string
     {
         if ($parameters !== []) {
-            $path .= '?'.http_build_query($parameters);
+            $path .= '?' . http_build_query($parameters);
         }
 
         return $this->client->getHttpClient()

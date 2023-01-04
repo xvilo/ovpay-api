@@ -43,6 +43,7 @@ class HttpClientBuilder
     {
         $this->plugins[] = $plugin;
         $this->pluginClient = null;
+
         return $this;
     }
 

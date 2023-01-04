@@ -34,6 +34,7 @@ final class TokenMethod implements AuthMethod
     public function setToken(mixed $token): self
     {
         $this->token = $token;
+
         return $this;
     }
 }

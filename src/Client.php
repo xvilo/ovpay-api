@@ -106,7 +106,7 @@ class Client
             ->addPlugin(new HeaderAppendPlugin([
                 'Accept' => 'application/json',
                 'Accept-Language' => 'nl-NL',
-                'User-Agent' => $this->getUserAgent()
+                'User-Agent' => $this->getUserAgent(),
             ]));
     }
 
