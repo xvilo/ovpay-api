@@ -11,7 +11,6 @@ final class TripsApi extends AbstractApi
 {
     public function getTrips(string $cardXtatUuid, int $offset = 0): Trips
     {
-        /** @var Trips $trips */
         return $this->client->getSerializer()->deserialize(
             $this->get(sprintf('/api/v3/Trips/%s', $cardXtatUuid), ['offset' => $offset]),
             Trips::class,

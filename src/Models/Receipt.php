@@ -7,13 +7,10 @@ use Xvilo\OVpayApi\Models\Receipt\ReceiptTrip;
 
 final class Receipt
 {
-    /**
-     * @param Payment[] $relatedPayments
-     * @param ReceiptTrip[] $relatedTrips
-     */
     public function __construct(
-        /** @var Payment */
+        /** @var Payment[] */
         private array $relatedPayments,
+        /** @var ReceiptTrip[] $relatedTrips */
         private array $relatedTrips,
         private readonly array $relatedBalances,
         private readonly Token $token

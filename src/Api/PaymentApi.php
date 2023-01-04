@@ -12,7 +12,6 @@ final class PaymentApi extends AbstractApi
 {
     public function getPayments(string $cardXtatUuid): Payments
     {
-        /** @var Payments $data */
         return $this->client->getSerializer()->deserialize(
             $this->get(sprintf('/api/v1/Payments/%s', $cardXtatUuid), ['offset' => 0]),
             Payments::class,
@@ -22,7 +21,6 @@ final class PaymentApi extends AbstractApi
 
     public function getReceipt(string $paymentXbot, string $paymentId): Receipt
     {
-        /** @var Receipt $receipt */
         return $this->client->getSerializer()->deserialize(
             $this->get(sprintf('/api/v1/Payments/receipt/%s/%s', $paymentXbot, $paymentId)),
             Receipt::class,

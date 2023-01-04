@@ -6,7 +6,22 @@ parameters:
 			path: src/Api/AnonymousApi.php
 
 		-
+			message: "#^Method Xvilo\\\\OVpayApi\\\\Api\\\\PaymentApi\\:\\:getPayments\\(\\) should return Xvilo\\\\OVpayApi\\\\Models\\\\Payments but returns object\\.$#"
+			count: 1
+			path: src/Api/PaymentApi.php
+
+		-
+			message: "#^Method Xvilo\\\\OVpayApi\\\\Api\\\\PaymentApi\\:\\:getReceipt\\(\\) should return Xvilo\\\\OVpayApi\\\\Models\\\\Receipt but returns object\\.$#"
+			count: 1
+			path: src/Api/PaymentApi.php
+
+		-
 			message: "#^Method Xvilo\\\\OVpayApi\\\\Api\\\\TripsApi\\:\\:getTrip\\(\\) should return Xvilo\\\\OVpayApi\\\\Models\\\\Receipt\\\\ReceiptTrip but returns object\\.$#"
+			count: 1
+			path: src/Api/TripsApi.php
+
+		-
+			message: "#^Method Xvilo\\\\OVpayApi\\\\Api\\\\TripsApi\\:\\:getTrips\\(\\) should return Xvilo\\\\OVpayApi\\\\Models\\\\Trips but returns object\\.$#"
 			count: 1
 			path: src/Api/TripsApi.php
 
