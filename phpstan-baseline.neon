@@ -49,3 +49,23 @@ parameters:
 			message: "#^Method Xvilo\\\\OVpayApi\\\\Models\\\\Receipt\\\\ReceiptTrip\\:\\:getCorrectionOptions\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Models/Receipt/ReceiptTrip.php
+
+		-
+			message: "#^Method Xvilo\\\\OVpayApi\\\\Tests\\\\Functional\\\\Api\\\\AnonymousApiTest\\:\\:registrationOpenDataProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Functional/Api/AnonymousApiTest.php
+
+		-
+			message: "#^Method Xvilo\\\\OVpayApi\\\\Tests\\\\Functional\\\\TestCase\\:\\:getMockHttpClient\\(\\) has parameter \\$responseFactory with no value type specified in iterable type iterable\\.$#"
+			count: 1
+			path: tests/Functional/TestCase.php
+
+		-
+			message: "#^Method Xvilo\\\\OVpayApi\\\\Tests\\\\Functional\\\\TestCase\\:\\:isAuthenticatedRequest\\(\\) has parameter \\$normalized_headers with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Functional/TestCase.php
+
+		-
+			message: "#^Parameter \\#1 \\$responseFactory of class Symfony\\\\Component\\\\HttpClient\\\\MockHttpClient constructor expects \\(callable\\(\\)\\: mixed\\)\\|iterable\\<\\(callable\\(\\)\\: mixed\\)\\|Symfony\\\\Contracts\\\\HttpClient\\\\ResponseInterface\\>\\|Symfony\\\\Contracts\\\\HttpClient\\\\ResponseInterface\\|null, \\(callable\\(\\)\\: mixed\\)\\|iterable\\|Symfony\\\\Contracts\\\\HttpClient\\\\ResponseInterface\\|null given\\.$#"
+			count: 1
+			path: tests/Functional/TestCase.php
