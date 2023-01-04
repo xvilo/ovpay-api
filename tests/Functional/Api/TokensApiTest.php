@@ -13,10 +13,11 @@ final class TokensApiTest extends TestCase
 {
     public function testGetCards(): void
     {
-        $apiClient = $this->getApiClientWithHttpClient($this->getMockHttpClient(function ($method, $url, $options): MockResponse {
-            return $this->isAuthenticatedRequest($options['normalized_headers'], $this->getExampleCard());
-        }));
+        $apiClient = $this->getApiClientWithHttpClient($this->getMockHttpClient(
+            fn($method, $url, $options): MockResponse => $this->isAuthenticatedRequest($options['normalized_headers'], $this->getExampleCard())
+        ));
         $apiClient->Authenticate(new HeaderMethod('Authorization', 'Bearer TEST'));
+
         $result = $apiClient->tokens()->getPaymentCards();
         self::assertCount(1, $result);
         self::assertInstanceOf(TokenPersonalization::class, $result[0]->getPersonalization());
@@ -32,9 +33,9 @@ final class TokensApiTest extends TestCase
         $this->expectExceptionMessage('Unauthorized. Either no credentials where provided, or the credentials have expired.');
         $this->expectExceptionCode(401);
 
-        $apiClient = $this->getApiClientWithHttpClient($this->getMockHttpClient(function ($method, $url, $options): MockResponse {
-            return $this->isAuthenticatedRequest($options['normalized_headers'], $this->getExampleCard());
-        }));
+        $apiClient = $this->getApiClientWithHttpClient($this->getMockHttpClient(
+            fn($method, $url, $options): MockResponse => $this->isAuthenticatedRequest($options['normalized_headers'], $this->getExampleCard())
+        ));
 
         $apiClient->tokens()->getPaymentCards();
     }

@@ -15,10 +15,11 @@ final class PaymentApiTest extends TestCase
 {
     public function testGetPayments(): void
     {
-        $apiClient = $this->getApiClientWithHttpClient($this->getMockHttpClient(function ($method, $url, $options): MockResponse {
-            return $this->isAuthenticatedRequest($options['normalized_headers'], $this->getPaymentsData());
-        }));
+        $apiClient = $this->getApiClientWithHttpClient($this->getMockHttpClient(
+            fn($method, $url, $options): MockResponse => $this->isAuthenticatedRequest($options['normalized_headers'], $this->getPaymentsData())
+        ));
         $apiClient->Authenticate(new HeaderMethod('Authorization', 'Bearer TEST'));
+
         $result = $apiClient->payment()->getPayments('2af820fb-30a4-48fe-881e-21521c94a95e');
 
         self::assertInstanceOf(Payments::class, $result);
@@ -35,18 +36,18 @@ final class PaymentApiTest extends TestCase
         $this->expectExceptionMessage('Unauthorized. Either no credentials where provided, or the credentials have expired.');
         $this->expectExceptionCode(401);
 
-        $apiClient = $this->getApiClientWithHttpClient($this->getMockHttpClient(function ($method, $url, $options): MockResponse {
-            return $this->isAuthenticatedRequest($options['normalized_headers'], $this->getPaymentsData());
-        }));
+        $apiClient = $this->getApiClientWithHttpClient($this->getMockHttpClient(
+            fn($method, $url, $options): MockResponse => $this->isAuthenticatedRequest($options['normalized_headers'], $this->getPaymentsData())
+        ));
 
         $apiClient->payment()->getPayments('2af820fb-30a4-48fe-881e-21521c94a95e');
     }
 
     public function testGetReceipt(): void
     {
-        $apiClient = $this->getApiClientWithHttpClient($this->getMockHttpClient(function ($method, $url, $options): MockResponse {
-            return $this->isAuthenticatedRequest($options['normalized_headers'], $this->getReceiptsData());
-        }));
+        $apiClient = $this->getApiClientWithHttpClient($this->getMockHttpClient(
+            fn($method, $url, $options): MockResponse => $this->isAuthenticatedRequest($options['normalized_headers'], $this->getReceiptsData())
+        ));
         $apiClient->Authenticate(new HeaderMethod('Authorization', 'Bearer TEST'));
 
         $result = $apiClient->payment()->getReceipt('f7386e11-1142-47a9-bf61-39ac6825588e', 'EVENT-O12-12345678901234567890123456789');
@@ -65,9 +66,9 @@ final class PaymentApiTest extends TestCase
         $this->expectExceptionMessage('Unauthorized. Either no credentials where provided, or the credentials have expired.');
         $this->expectExceptionCode(401);
 
-        $apiClient = $this->getApiClientWithHttpClient($this->getMockHttpClient(function ($method, $url, $options): MockResponse {
-            return $this->isAuthenticatedRequest($options['normalized_headers'], $this->getReceiptsData());
-        }));
+        $apiClient = $this->getApiClientWithHttpClient($this->getMockHttpClient(
+            fn($method, $url, $options): MockResponse => $this->isAuthenticatedRequest($options['normalized_headers'], $this->getReceiptsData())
+        ));
 
         $apiClient->payment()->getReceipt('f7386e11-1142-47a9-bf61-39ac6825588e', 'EVENT-O12-12345678901234567890123456789');
     }

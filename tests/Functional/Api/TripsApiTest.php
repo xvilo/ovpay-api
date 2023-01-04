@@ -15,9 +15,9 @@ final class TripsApiTest extends TestCase
 {
     public function testGetTrips(): void
     {
-        $apiClient = $this->getApiClientWithHttpClient($this->getMockHttpClient(function ($method, $url, $options): MockResponse {
-            return $this->isAuthenticatedRequest($options['normalized_headers'], $this->getTripsData());
-        }));
+        $apiClient = $this->getApiClientWithHttpClient($this->getMockHttpClient(
+            fn($method, $url, $options): MockResponse => $this->isAuthenticatedRequest($options['normalized_headers'], $this->getTripsData())
+        ));
         $apiClient->Authenticate(new HeaderMethod('Authorization', 'Bearer TEST'));
         /** @var Trips $trips */
         $trips = $apiClient->trips()->getTrips('2af820fb-30a4-48fe-881e-21521c94a95e');
@@ -35,20 +35,21 @@ final class TripsApiTest extends TestCase
         $this->expectExceptionMessage('Unauthorized. Either no credentials where provided, or the credentials have expired.');
         $this->expectExceptionCode(401);
 
-        $apiClient = $this->getApiClientWithHttpClient($this->getMockHttpClient(function ($method, $url, $options): MockResponse {
-            return $this->isAuthenticatedRequest($options['normalized_headers'], $this->getTripsData());
-        }));
+        $apiClient = $this->getApiClientWithHttpClient($this->getMockHttpClient(
+            fn($method, $url, $options): MockResponse => $this->isAuthenticatedRequest($options['normalized_headers'], $this->getTripsData())
+        ));
 
         $apiClient->trips()->getTrips('2af820fb-30a4-48fe-881e-21521c94a95e');
     }
 
     public function testGetTrip(): void
     {
-        $apiClient = $this->getApiClientWithHttpClient($this->getMockHttpClient(function ($method, $url, $options): MockResponse {
-            return $this->isAuthenticatedRequest($options['normalized_headers'], $this->getTripData());
-        }));
+        $apiClient = $this->getApiClientWithHttpClient($this->getMockHttpClient(
+            fn($method, $url, $options): MockResponse => $this->isAuthenticatedRequest($options['normalized_headers'], $this->getTripData())
+        ));
         $apiClient->Authenticate(new HeaderMethod('Authorization', 'Bearer TEST'));
-        $result = $apiClient->trips()->getTrip('2af820fb-30a4-48fe-881e-21521c94a95e', 12345678);
+
+        $result = $apiClient->trips()->getTrip('2af820fb-30a4-48fe-881e-21521c94a95e', 12_345_678);
         self::assertInstanceOf(Trip::class, $result->getTrip());
         self::assertEquals(null, $result->getCorrectedFrom());
         self::assertEquals(null, $result->getCorrectedFromType());
@@ -61,10 +62,10 @@ final class TripsApiTest extends TestCase
         $this->expectExceptionMessage('Unauthorized. Either no credentials where provided, or the credentials have expired.');
         $this->expectExceptionCode(401);
 
-        $apiClient = $this->getApiClientWithHttpClient($this->getMockHttpClient(function ($method, $url, $options): MockResponse {
-            return $this->isAuthenticatedRequest($options['normalized_headers'], $this->getTripData());
-        }));
+        $apiClient = $this->getApiClientWithHttpClient($this->getMockHttpClient(
+            fn($method, $url, $options): MockResponse => $this->isAuthenticatedRequest($options['normalized_headers'], $this->getTripData())
+        ));
 
-        $apiClient->trips()->getTrip('2af820fb-30a4-48fe-881e-21521c94a95e', 12345678);
+        $apiClient->trips()->getTrip('2af820fb-30a4-48fe-881e-21521c94a95e', 12_345_678);
     }
 }

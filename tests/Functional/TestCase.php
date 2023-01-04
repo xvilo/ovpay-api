@@ -12,9 +12,6 @@ use Symfony\Contracts\HttpClient\ResponseInterface;
 
 abstract class TestCase extends BaseTestCase
 {
-    /**
-     * @param callable|callable[]|ResponseInterface|ResponseInterface[]|iterable|null $responseFactory
-     */
     protected function getMockHttpClient(callable|ResponseInterface|iterable|null $responseFactory = null): HttpClient
     {
         return new HttplugClient(new MockHttpClient($responseFactory));
@@ -89,9 +86,9 @@ JSON;
 [
     {
         "xtat": "2af820fb-30a4-48fe-881e-21521c94a95e",
-        "mediumType": "$mediumType",
+        "mediumType": "{$mediumType}",
         "xbot": "3f71d274-45f0-4b26-a628-7b7853301e89",
-        "status": "$status",
+        "status": "{$status}",
         "personalization": {
           "name": "",
           "color": "Pink",
@@ -184,7 +181,7 @@ JSON;
     protected function isAuthenticatedRequest(array $normalized_headers, string $returnData): MockResponse
     {
         $authHeader = ($normalized_headers['authorization'] ?? []);
-        if (count($authHeader) === 1 && $authHeader[0] === 'Authorization: Bearer TEST') {
+        if ((is_countable($authHeader) ? count($authHeader) : 0) === 1 && $authHeader[0] === 'Authorization: Bearer TEST') {
             return new MockResponse($returnData);
         }
 

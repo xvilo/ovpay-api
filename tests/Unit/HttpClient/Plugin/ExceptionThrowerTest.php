@@ -26,12 +26,8 @@ final class ExceptionThrowerTest extends TestCase
         $plugin = new ExceptionThrower();
         $result = $plugin->handleRequest(
             $request,
-            function (RequestInterface $request) use ($promise) {
-                return $promise;
-            },
-            function (RequestInterface $request) use ($promise) {
-                return $promise;
-            }
+            static fn(RequestInterface $request): \Http\Client\Promise\HttpFulfilledPromise => $promise,
+            static fn(RequestInterface $request): \Http\Client\Promise\HttpFulfilledPromise => $promise
         );
 
         $result->wait();

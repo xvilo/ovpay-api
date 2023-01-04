@@ -36,7 +36,7 @@ final class AnonymousApiTest extends TestCase
         self::assertEquals($expected, $apiClient->anonymous()->isRegistrationOpen());
     }
 
-    public function registrationOpenDataProvider()
+    public function registrationOpenDataProvider(): array
     {
         return [
             'bare-true' => ['data' => 'true', 'expected' => true],
