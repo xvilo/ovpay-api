@@ -24,7 +24,6 @@ use Xvilo\OVpayApi\Authentication\AuthMethod;
 use Xvilo\OVpayApi\HttpClient\HttpClientBuilder;
 use Xvilo\OVpayApi\HttpClient\Plugin\AuthMethodPlugin;
 use Xvilo\OVpayApi\HttpClient\Plugin\ExceptionThrower;
-use Xvilo\OVpayApi\Tests\Functional\Api\PaymentApiTest;
 
 class Client
 {

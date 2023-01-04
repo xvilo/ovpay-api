@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Xvilo\OVpayApi\Api;
 
-use Xvilo\OVpayApi\Models\Payment;
 use Xvilo\OVpayApi\Models\Payments;
 use Xvilo\OVpayApi\Models\Receipt;
 

@@ -1,9 +1,9 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Xvilo\OVpayApi\Authentication;
 
-use Lcobucci\JWT\Token as TokenInterface;
 use RuntimeException;
 use Throwable;
 

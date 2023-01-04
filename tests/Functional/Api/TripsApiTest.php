@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Xvilo\OVpayApi\Tests\Functional\Api;
@@ -6,7 +7,6 @@ namespace Xvilo\OVpayApi\Tests\Functional\Api;
 use Symfony\Component\HttpClient\Response\MockResponse;
 use Xvilo\OVpayApi\Authentication\HeaderMethod;
 use Xvilo\OVpayApi\Exception\UnauthorizedException;
-use Xvilo\OVpayApi\Models\Receipt\ReceiptTrip;
 use Xvilo\OVpayApi\Models\Trip;
 use Xvilo\OVpayApi\Models\Trips;
 use Xvilo\OVpayApi\Tests\Functional\TestCase;
@@ -16,7 +16,7 @@ final class TripsApiTest extends TestCase
     public function testGetTrips(): void
     {
         $apiClient = $this->getApiClientWithHttpClient($this->getMockHttpClient(
-            fn($method, $url, $options): MockResponse => $this->isAuthenticatedRequest($options['normalized_headers'], $this->getTripsData())
+            fn ($method, $url, $options): MockResponse => $this->isAuthenticatedRequest($options['normalized_headers'], $this->getTripsData())
         ));
         $apiClient->Authenticate(new HeaderMethod('Authorization', 'Bearer TEST'));
         /** @var Trips $trips */
@@ -36,7 +36,7 @@ final class TripsApiTest extends TestCase
         $this->expectExceptionCode(401);
 
         $apiClient = $this->getApiClientWithHttpClient($this->getMockHttpClient(
-            fn($method, $url, $options): MockResponse => $this->isAuthenticatedRequest($options['normalized_headers'], $this->getTripsData())
+            fn ($method, $url, $options): MockResponse => $this->isAuthenticatedRequest($options['normalized_headers'], $this->getTripsData())
         ));
 
         $apiClient->trips()->getTrips('2af820fb-30a4-48fe-881e-21521c94a95e');
@@ -45,7 +45,7 @@ final class TripsApiTest extends TestCase
     public function testGetTrip(): void
     {
         $apiClient = $this->getApiClientWithHttpClient($this->getMockHttpClient(
-            fn($method, $url, $options): MockResponse => $this->isAuthenticatedRequest($options['normalized_headers'], $this->getTripData())
+            fn ($method, $url, $options): MockResponse => $this->isAuthenticatedRequest($options['normalized_headers'], $this->getTripData())
         ));
         $apiClient->Authenticate(new HeaderMethod('Authorization', 'Bearer TEST'));
 
@@ -63,7 +63,7 @@ final class TripsApiTest extends TestCase
         $this->expectExceptionCode(401);
 
         $apiClient = $this->getApiClientWithHttpClient($this->getMockHttpClient(
-            fn($method, $url, $options): MockResponse => $this->isAuthenticatedRequest($options['normalized_headers'], $this->getTripData())
+            fn ($method, $url, $options): MockResponse => $this->isAuthenticatedRequest($options['normalized_headers'], $this->getTripData())
         ));
 
         $apiClient->trips()->getTrip('2af820fb-30a4-48fe-881e-21521c94a95e', 12_345_678);

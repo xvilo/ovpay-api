@@ -7,7 +7,6 @@ namespace Xvilo\OVpayApi\HttpClient\Plugin;
 use Http\Client\Common\Plugin;
 use Http\Promise\Promise;
 use Psr\Http\Message\RequestInterface;
-use RuntimeException;
 use Xvilo\OVpayApi\Authentication\AuthMethod;
 use Xvilo\OVpayApi\Authentication\ExceptionRefresher;
 use Xvilo\OVpayApi\Authentication\Refresher;

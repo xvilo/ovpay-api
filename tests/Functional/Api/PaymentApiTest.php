@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Xvilo\OVpayApi\Tests\Functional\Api;
@@ -16,7 +17,7 @@ final class PaymentApiTest extends TestCase
     public function testGetPayments(): void
     {
         $apiClient = $this->getApiClientWithHttpClient($this->getMockHttpClient(
-            fn($method, $url, $options): MockResponse => $this->isAuthenticatedRequest($options['normalized_headers'], $this->getPaymentsData())
+            fn ($method, $url, $options): MockResponse => $this->isAuthenticatedRequest($options['normalized_headers'], $this->getPaymentsData())
         ));
         $apiClient->Authenticate(new HeaderMethod('Authorization', 'Bearer TEST'));
 
@@ -37,7 +38,7 @@ final class PaymentApiTest extends TestCase
         $this->expectExceptionCode(401);
 
         $apiClient = $this->getApiClientWithHttpClient($this->getMockHttpClient(
-            fn($method, $url, $options): MockResponse => $this->isAuthenticatedRequest($options['normalized_headers'], $this->getPaymentsData())
+            fn ($method, $url, $options): MockResponse => $this->isAuthenticatedRequest($options['normalized_headers'], $this->getPaymentsData())
         ));
 
         $apiClient->payment()->getPayments('2af820fb-30a4-48fe-881e-21521c94a95e');
@@ -46,7 +47,7 @@ final class PaymentApiTest extends TestCase
     public function testGetReceipt(): void
     {
         $apiClient = $this->getApiClientWithHttpClient($this->getMockHttpClient(
-            fn($method, $url, $options): MockResponse => $this->isAuthenticatedRequest($options['normalized_headers'], $this->getReceiptsData())
+            fn ($method, $url, $options): MockResponse => $this->isAuthenticatedRequest($options['normalized_headers'], $this->getReceiptsData())
         ));
         $apiClient->Authenticate(new HeaderMethod('Authorization', 'Bearer TEST'));
 
@@ -67,7 +68,7 @@ final class PaymentApiTest extends TestCase
         $this->expectExceptionCode(401);
 
         $apiClient = $this->getApiClientWithHttpClient($this->getMockHttpClient(
-            fn($method, $url, $options): MockResponse => $this->isAuthenticatedRequest($options['normalized_headers'], $this->getReceiptsData())
+            fn ($method, $url, $options): MockResponse => $this->isAuthenticatedRequest($options['normalized_headers'], $this->getReceiptsData())
         ));
 
         $apiClient->payment()->getReceipt('f7386e11-1142-47a9-bf61-39ac6825588e', 'EVENT-O12-12345678901234567890123456789');
