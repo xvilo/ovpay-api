@@ -26,6 +26,7 @@ final class AnonymousApi extends AbstractApi
     public function isRegistrationOpen(): bool
     {
         $dat = json_decode($this->get('/api/anonymous/v1/PassengerAccounts/RegistrationOpen'), true, 512, JSON_THROW_ON_ERROR);
+
         return $dat === true || $dat === [true];
     }
 }

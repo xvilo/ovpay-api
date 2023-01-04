@@ -10,8 +10,8 @@ use Throwable;
 final class ExceptionRefresher implements Refresher
 {
     public function __construct(
-        private readonly string     $message = "",
-        private readonly int        $code = 0,
+        private readonly string $message = '',
+        private readonly int $code = 0,
         private readonly ?Throwable $previous = null
     ) {
     }

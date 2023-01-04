@@ -42,6 +42,7 @@ final class Payments
     public function setItems(array $items): self
     {
         $this->items = $items;
+
         return $this;
     }
 }

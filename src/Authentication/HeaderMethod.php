@@ -39,6 +39,7 @@ final class HeaderMethod implements AuthMethod
         }
 
         $this->value = $token;
+
         return $this;
     }
 }
