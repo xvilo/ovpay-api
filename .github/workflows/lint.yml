@@ -17,3 +17,10 @@ jobs:
       - uses: php-actions/composer@v6
         with:
           command: exec rector process
+  php-cs-fixer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: php-actions/composer@v6
+      - name: Dry run of php-cs-fixer
+        run: vendor/bin/php-cs-fixer fix -v --allow-risky=yes --dry-run

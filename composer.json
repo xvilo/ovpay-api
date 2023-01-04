@@ -26,6 +26,7 @@
         "nyholm/psr7": "^1.5",
         "symfony/http-client": "^6.2",
         "phpunit/phpunit": "^9.5",
-        "symfony/property-access": "^6.2"
+        "symfony/property-access": "^6.2",
+        "friendsofphp/php-cs-fixer": "^3.13"
     }
 }
