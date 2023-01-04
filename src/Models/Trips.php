@@ -35,12 +35,8 @@ final class Trips
         return $this->items;
     }
 
-    /**
-     * @param TripsItem[] $items
-     */
-    public function setItems(array $items): self
+    public function addItem(TripsItem $item): void
     {
-        $this->items = $items;
-        return $this;
+        $this->items[] = $item;
     }
 }

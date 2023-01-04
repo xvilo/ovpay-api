@@ -50,13 +50,13 @@ final class PaymentApiTest extends TestCase
         $apiClient->Authenticate(new HeaderMethod('Authorization', 'Bearer TEST'));
 
         $result = $apiClient->payment()->getReceipt('f7386e11-1142-47a9-bf61-39ac6825588e', 'EVENT-O12-12345678901234567890123456789');
-        self::assertNotEmpty($result->getPayments());
-        self::assertCount(1, $result->getPayments());
-        self::assertInstanceOf(Payment::class, $result->getPayments()[0]);
+        self::assertNotEmpty($result->getRelatedPayments());
+        self::assertCount(1, $result->getRelatedPayments());
+        self::assertInstanceOf(Payment::class, $result->getRelatedPayments()[0]);
 
-        self::assertNotEmpty($result->getTrips());
-        self::assertCount(1, $result->getTrips());
-        self::assertInstanceOf(ReceiptTrip::class, $result->getTrips()[0]);
+        self::assertNotEmpty($result->getRelatedTrips());
+        self::assertCount(1, $result->getRelatedTrips());
+        self::assertInstanceOf(ReceiptTrip::class, $result->getRelatedTrips()[0]);
     }
 
     public function testGetReceiptNoAuth(): void

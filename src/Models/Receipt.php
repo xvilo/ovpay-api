@@ -12,6 +12,7 @@ final class Receipt
      * @param ReceiptTrip[] $relatedTrips
      */
     public function __construct(
+        /** @var Payment */
         private array $relatedPayments,
         private array $relatedTrips,
         private readonly array $relatedBalances,
@@ -22,37 +23,27 @@ final class Receipt
     /**
      * @return Payment[]
      */
-    public function getPayments(): array
+    public function getRelatedPayments(): array
     {
         return $this->relatedPayments;
     }
 
-    /**
-     * @param Payment[] $payments
-     * @return $this
-     */
-    public function setPayments(array $payments): self
+    public function addRelatedPayment(Payment $payment): void
     {
-        $this->relatedPayments = $payments;
-        return $this;
+        $this->relatedPayments[] = $payment;
     }
 
     /**
      * @return ReceiptTrip[]
      */
-    public function getTrips(): array
+    public function getRelatedTrips(): array
     {
         return $this->relatedTrips;
     }
 
-    /**
-     * @param ReceiptTrip[] $trips
-     * @return $this
-     */
-    public function setTrips(array $trips): self
+    public function addRelatedTrip(ReceiptTrip $trip): void
     {
-        $this->relatedTrips = $trips;
-        return $this;
+        $this->relatedTrips[] = $trip;
     }
 
     public function getRelatedBalances(): array

@@ -8,8 +8,16 @@ final class Payments
     /**
      * @param Payment[] $items
      */
-    public function __construct(private readonly int $offset, private readonly bool $endOfListReached, private array $items)
+    public function __construct(
+        private readonly int $offset,
+        private readonly bool $endOfListReached,
+        private array $items
+    ) {
+    }
+
+    public function addItem(Payment $item): void
     {
+        $this->items[] = $item;
     }
 
     public function getItems(): array
