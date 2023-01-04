@@ -11,20 +11,11 @@ final class TripsApi extends AbstractApi
 {
     public function getTrips(string $cardXtatUuid, int $offset = 0): Trips
     {
-        /** @var Trips $trips */
-        $trips = $this->client->getSerializer()->deserialize(
+        return $this->client->getSerializer()->deserialize(
             $this->get(sprintf('/api/v3/Trips/%s', $cardXtatUuid), ['offset' => $offset]),
             Trips::class,
             'json'
         );
-
-        $trips->setItems($this->client->getSerializer()->deserialize(
-            json_encode($trips->getItems(), JSON_THROW_ON_ERROR),
-            Trips\TripsItem::class . '[]',
-            'json'
-        ));
-
-        return $trips;
     }
 
     public function getTrip(string $tripXbotUuid, int $tripId): ReceiptTrip
