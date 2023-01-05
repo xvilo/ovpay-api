@@ -21,11 +21,16 @@ final class TokensApiTest extends TestCase
 
         $result = $apiClient->tokens()->getPaymentCards();
         self::assertCount(1, $result);
-        self::assertInstanceOf(TokenPersonalization::class, $result[0]->getPersonalization());
         self::assertIsString($result[0]->getXbot());
         self::assertIsString($result[0]->getMediumType());
         self::assertIsString($result[0]->getXtat());
         self::assertIsString($result[0]->getStatus());
+
+        $tokenPersonalization = $result[0]->getPersonalization();
+        self::assertInstanceOf(TokenPersonalization::class, $tokenPersonalization);
+        self::assertEquals('Pink', $tokenPersonalization->getColor());
+        self::assertEquals('PhysicalCard', $tokenPersonalization->getMedium());
+        self::assertEquals('', $tokenPersonalization->getName());
     }
 
     public function testGetCardsNoAuth(): void

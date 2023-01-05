@@ -14,8 +14,9 @@ return $config->setRules([
     'strict_param' => true,
     'fully_qualified_strict_types' => true,
     'global_namespace_import' => [
+        'import_classes' => true,
         'import_constants' => true,
-        'import_functions' => true,
+        'import_functions' => true
     ],
     'lambda_not_used_import' => true,
     'no_leading_import_slash' => true,

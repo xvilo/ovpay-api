@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Xvilo\OVpayApi\Tests\Functional\Api;
 
+use DateTimeImmutable;
 use Symfony\Component\HttpClient\Response\MockResponse;
 use Xvilo\OVpayApi\Models\Notices;
 use Xvilo\OVpayApi\Tests\Functional\TestCase;
@@ -18,12 +19,18 @@ final class AnonymousApiTest extends TestCase
 
         $res = $apiClient->anonymous()->getNotices();
         self::assertInstanceOf(Notices::class, $res);
-        self::assertInstanceOf(Notices\TermsAndConditions::class, $res->getTermsAndConditions());
-        self::assertInstanceOf(Notices\PrivacyStatement::class, $res->getPrivacyStatement());
         self::assertIsArray($res->getServiceWebsiteDisruptions());
         self::assertIsArray($res->getOvPayAppDisruptions());
         self::assertEmpty($res->getServiceWebsiteDisruptions());
         self::assertEmpty($res->getOvPayAppDisruptions());
+
+        self::assertInstanceOf(Notices\TermsAndConditions::class, $res->getTermsAndConditions());
+        self::assertEquals([], $res->getTermsAndConditions()->getHighlights());
+        self::assertInstanceOf(DateTimeImmutable::class, $res->getTermsAndConditions()->getLastModified());
+
+        self::assertInstanceOf(Notices\PrivacyStatement::class, $res->getPrivacyStatement());
+        self::assertInstanceOf(DateTimeImmutable::class, $res->getPrivacyStatement()->getLastModified());
+        self::assertEquals([], $res->getPrivacyStatement()->getHighlights());
     }
 
     /**
