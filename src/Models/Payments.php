@@ -35,14 +35,4 @@ final class Payments
     {
         return $this->offset;
     }
-
-    /**
-     * @param Payment[] $items
-     */
-    public function setItems(array $items): self
-    {
-        $this->items = $items;
-
-        return $this;
-    }
 }
