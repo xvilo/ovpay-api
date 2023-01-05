@@ -8,6 +8,7 @@ use Xvilo\OVpayApi\Models\Trip;
 use Xvilo\OVpayApi\Models\Trips;
 use Xvilo\OVpayApi\Models\Trips\TripsItem;
 use Xvilo\OVpayApi\Tests\Unit\TestCase;
+use DateTimeImmutable;
 
 final class TripsTest extends TestCase
 {
@@ -33,15 +34,15 @@ final class TripsTest extends TestCase
                 'RAIL',
                 'COMPLETE',
                 'Utrecht CS',
-                new \DateTimeImmutable(),
+                new DateTimeImmutable(),
                 'Leiden CS',
-                new \DateTimeImmutable(),
+                new DateTimeImmutable(),
                 'EUR',
                 0,
                 'phpunit',
                 false
             ),
-            new \DateTimeImmutable(), null
+            new DateTimeImmutable(), null
         );
         $trips = new Trips(1, true, [$item]);
         self::assertCount(1, $trips->getItems());
@@ -58,15 +59,15 @@ final class TripsTest extends TestCase
                 'RAIL',
                 'COMPLETE',
                 'Utrecht CS',
-                new \DateTimeImmutable(),
+                new DateTimeImmutable(),
                 'Leiden CS',
-                new \DateTimeImmutable(),
+                new DateTimeImmutable(),
                 'EUR',
                 0,
                 'phpunit',
                 false
             ),
-            new \DateTimeImmutable(), null
+            new DateTimeImmutable(), null
         );
         $trips = new Trips(1, true, [$item]);
 
@@ -78,15 +79,15 @@ final class TripsTest extends TestCase
                 'RAIL',
                 'COMPLETE',
                 'Utrecht CS',
-                new \DateTimeImmutable(),
+                new DateTimeImmutable(),
                 'Leiden CS',
-                new \DateTimeImmutable(),
+                new DateTimeImmutable(),
                 'EUR',
                 0,
                 'phpunit',
                 false
             ),
-            new \DateTimeImmutable(), null
+            new DateTimeImmutable(), null
         );
         $trips->addItem($itemTwo);
 

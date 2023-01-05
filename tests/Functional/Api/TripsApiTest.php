@@ -12,6 +12,7 @@ use Xvilo\OVpayApi\Exception\UnauthorizedException;
 use Xvilo\OVpayApi\Models\Trip;
 use Xvilo\OVpayApi\Models\Trips;
 use Xvilo\OVpayApi\Tests\Functional\TestCase;
+use Exception;
 
 final class TripsApiTest extends TestCase
 {
@@ -45,7 +46,7 @@ final class TripsApiTest extends TestCase
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public function testGetTrip(): void
     {
