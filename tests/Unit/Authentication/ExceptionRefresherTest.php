@@ -10,7 +10,7 @@ use Xvilo\OVpayApi\Tests\Unit\TestCase;
 
 final class ExceptionRefresherTest extends TestCase
 {
-    public function testThrowsException(): void
+    public function testThrowsException(): never
     {
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('Some test message');
