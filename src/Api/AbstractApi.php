@@ -33,4 +33,62 @@ abstract class AbstractApi
             ->getBody()
             ->getContents();
     }
+
+    /**
+     * Send a POST request with JSON-encoded parameters.
+     *
+     * @param string $path           request path
+     * @param array  $parameters     POST parameters to be JSON encoded
+     * @param array  $requestHeaders request headers
+     *
+     * @return array|string
+     */
+    protected function post(string $path, array $parameters = [], array $requestHeaders = [])
+    {
+        return $this->postRaw(
+            $path,
+            $this->createJsonBody($parameters),
+            $requestHeaders
+        );
+    }
+
+    /**
+     * Send a POST request with raw data.
+     *
+     * @param string $path           request path
+     * @param string $body           request body
+     * @param array  $requestHeaders request headers
+     */
+    protected function postRaw(string $path, string $body, array $requestHeaders = []): string
+    {
+        return $this->client->getHttpClient()
+            ->post($path, $requestHeaders, $body)
+            ->getBody()
+            ->getContents();
+    }
+
+    /**
+     * Send a DELETE request with JSON-encoded parameters.
+     *
+     * @param string $path           request path
+     * @param array  $parameters     POST parameters to be JSON encoded
+     * @param array  $requestHeaders request headers
+     */
+    protected function delete(string $path, array $parameters = [], array $requestHeaders = []): string
+    {
+        return $this->client->getHttpClient()
+            ->delete($path, $requestHeaders, $this->createJsonBody($parameters))
+            ->getBody()
+            ->getContents();
+    }
+
+    /**
+     * Create a JSON encoded version of an array of parameters.
+     *
+     * @param array $parameters Request parameters
+     */
+    protected function createJsonBody(array $parameters): ?string
+    {
+        return ($parameters === []) ? null : json_encode($parameters, empty($parameters) ? JSON_FORCE_OBJECT : 0);
+    }
 }

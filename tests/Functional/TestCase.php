@@ -176,13 +176,24 @@ JSON;
 JSON;
     }
 
-    protected function isAuthenticatedRequest(array $normalized_headers, string $returnData): MockResponse
+    protected function isAuthenticatedRequest(array $normalized_headers, string $returnData, int $httpCode = 200): MockResponse
     {
         $authHeader = ($normalized_headers['authorization'] ?? []);
         if ((is_countable($authHeader) ? count($authHeader) : 0) === 1 && $authHeader[0] === 'Authorization: Bearer TEST') {
-            return new MockResponse($returnData);
+            return new MockResponse($returnData, ['http_code' => $httpCode]);
         }
 
         return new MockResponse('', ['http_code' => 401]);
+    }
+
+    protected function getFailedAddPassengerAccountResponse(string $paymentServiceReferenceId, int $amountInCents): string
+    {
+        return <<<JSON
+{
+  "title": "Payment not found with serviceReferenceId (SRFID) '{$paymentServiceReferenceId}' and amountInCents '{$amountInCents}'",
+  "status": 404,
+  "BindPaymentCardBySrfidTerm": "31.00:00:00"
+}
+JSON;
     }
 }
