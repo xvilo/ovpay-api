@@ -17,6 +17,7 @@ use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\SerializerInterface;
 use Xvilo\OVpayApi\Api\AnonymousApi;
+use Xvilo\OVpayApi\Api\PassengerAccountsApi;
 use Xvilo\OVpayApi\Api\PaymentApi;
 use Xvilo\OVpayApi\Api\TokensApi;
 use Xvilo\OVpayApi\Api\TripsApi;
@@ -40,6 +41,8 @@ class Client
 
     private readonly PaymentApi $payment;
 
+    private readonly PassengerAccountsApi $passengerAccounts;
+
     public function __construct(
         private readonly HttpClientBuilder $httpClientBuilder = new HttpClientBuilder(),
         private readonly string $baseHost = 'https://api.ovpay.app',
@@ -54,6 +57,7 @@ class Client
         $this->trips = new TripsApi($this);
         $this->tokens = new TokensApi($this);
         $this->payment = new PaymentApi($this);
+        $this->passengerAccounts = new PassengerAccountsApi($this);
     }
 
     public function anonymous(): AnonymousApi
@@ -74,6 +78,11 @@ class Client
     public function payment(): PaymentApi
     {
         return $this->payment;
+    }
+
+    public function passengerAccounts(): PassengerAccountsApi
+    {
+        return $this->passengerAccounts;
     }
 
     public function Authenticate(AuthMethod $method): self

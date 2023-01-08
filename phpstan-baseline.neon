@@ -1,9 +1,64 @@
 parameters:
 	ignoreErrors:
 		-
+			message: "#^Method Xvilo\\\\OVpayApi\\\\Api\\\\AbstractApi\\:\\:createJsonBody\\(\\) has parameter \\$parameters with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Api/AbstractApi.php
+
+		-
+			message: "#^Method Xvilo\\\\OVpayApi\\\\Api\\\\AbstractApi\\:\\:createJsonBody\\(\\) should return string\\|null but returns string\\|false\\|null\\.$#"
+			count: 1
+			path: src/Api/AbstractApi.php
+
+		-
+			message: "#^Method Xvilo\\\\OVpayApi\\\\Api\\\\AbstractApi\\:\\:delete\\(\\) has parameter \\$parameters with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Api/AbstractApi.php
+
+		-
+			message: "#^Method Xvilo\\\\OVpayApi\\\\Api\\\\AbstractApi\\:\\:delete\\(\\) has parameter \\$requestHeaders with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Api/AbstractApi.php
+
+		-
+			message: "#^Method Xvilo\\\\OVpayApi\\\\Api\\\\AbstractApi\\:\\:post\\(\\) has parameter \\$parameters with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Api/AbstractApi.php
+
+		-
+			message: "#^Method Xvilo\\\\OVpayApi\\\\Api\\\\AbstractApi\\:\\:post\\(\\) has parameter \\$requestHeaders with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Api/AbstractApi.php
+
+		-
+			message: "#^Method Xvilo\\\\OVpayApi\\\\Api\\\\AbstractApi\\:\\:post\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Api/AbstractApi.php
+
+		-
+			message: "#^Method Xvilo\\\\OVpayApi\\\\Api\\\\AbstractApi\\:\\:postRaw\\(\\) has parameter \\$requestHeaders with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Api/AbstractApi.php
+
+		-
+			message: "#^Parameter \\#2 \\$body of method Xvilo\\\\OVpayApi\\\\Api\\\\AbstractApi\\:\\:postRaw\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Api/AbstractApi.php
+
+		-
+			message: "#^Variable \\$parameters in empty\\(\\) always exists and is not falsy\\.$#"
+			count: 1
+			path: src/Api/AbstractApi.php
+
+		-
 			message: "#^Method Xvilo\\\\OVpayApi\\\\Api\\\\AnonymousApi\\:\\:getNotices\\(\\) should return Xvilo\\\\OVpayApi\\\\Models\\\\Notices but returns object\\.$#"
 			count: 1
 			path: src/Api/AnonymousApi.php
+
+		-
+			message: "#^Method Xvilo\\\\OVpayApi\\\\Api\\\\PassengerAccountsApi\\:\\:addByServiceReferenceId\\(\\) should return Xvilo\\\\OVpayApi\\\\Models\\\\AddedPassengerAccount but returns object\\.$#"
+			count: 1
+			path: src/Api/PassengerAccountsApi.php
 
 		-
 			message: "#^Method Xvilo\\\\OVpayApi\\\\Api\\\\PaymentApi\\:\\:getPayments\\(\\) should return Xvilo\\\\OVpayApi\\\\Models\\\\Payments but returns object\\.$#"
