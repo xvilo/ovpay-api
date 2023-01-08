@@ -8,6 +8,7 @@ use Ramsey\Uuid\Uuid;
 use Xvilo\OVpayApi\Models\Payment;
 use Xvilo\OVpayApi\Models\Payments;
 use Xvilo\OVpayApi\Tests\Unit\TestCase;
+use DateTimeImmutable;
 
 final class PaymentsTest extends TestCase
 {
@@ -22,7 +23,7 @@ final class PaymentsTest extends TestCase
         self::assertCount(0, $payments->getItems());
 
         $uuid = Uuid::uuid4()->toString();
-        $time = new \DateTimeImmutable();
+        $time = new DateTimeImmutable();
         $payments->addItem(new Payment(
             'ABCDEFG1234567',
             $uuid,
