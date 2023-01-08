@@ -8,12 +8,13 @@ use Ramsey\Uuid\Uuid;
 use Xvilo\OVpayApi\Models\Payment;
 use Xvilo\OVpayApi\Models\Receipt;
 use Xvilo\OVpayApi\Models\Token;
+use Xvilo\OVpayApi\Models\Trip;
 use Xvilo\OVpayApi\Tests\Unit\TestCase;
 use DateTimeImmutable;
 
 final class ReceiptTest extends TestCase
 {
-    public function testBasicReceipt(): void
+    public function testAddRelatedPayment(): void
     {
         $receipt = new Receipt([], [], [], new Token('Emv', Uuid::uuid4()->toString(), 'Active', new Token\TokenPersonalization('Card', 'Pink', '')));
         self::assertEmpty($receipt->getRelatedPayments());
@@ -49,5 +50,38 @@ final class ReceiptTest extends TestCase
         self::assertEquals('Emv', $receipt->getRelatedPayments()[0]->getPaymentMethod());
         self::assertEquals(null, $receipt->getRelatedPayments()[0]->getRejectionReason());
         self::assertEquals(false, $receipt->getRelatedPayments()[0]->isLoyaltyOrDiscount());
+    }
+
+    public function testAddRelatedPTrip(): void
+    {
+        $receipt = new Receipt([], [], [], new Token('Emv', Uuid::uuid4()->toString(), 'Active', new Token\TokenPersonalization('Card', 'Pink', '')));
+        self::assertEmpty($receipt->getRelatedPayments());
+        self::assertEmpty($receipt->getRelatedBalances());
+        self::assertEmpty($receipt->getRelatedTrips());
+
+        $tripXbot = Uuid::uuid4()->toString();
+        $receipt->addRelatedTrip(new Receipt\ReceiptTrip(
+            [],
+            new Trip(
+                $tripXbot,
+                1234,
+                1,
+                'RAIL',
+                'COMPLETE',
+                'Utrecht CS',
+                new DateTimeImmutable(),
+                'Utrecht CS',
+                new DateTimeImmutable(),
+                'EUR',
+                10,
+                'NS',
+                true,
+            ),
+            null,
+            null,
+        ));
+
+        self::assertCount(1, $receipt->getRelatedTrips());
+        self::assertInstanceOf(Receipt\ReceiptTrip::class, $receipt->getRelatedTrips()[0]);
     }
 }
