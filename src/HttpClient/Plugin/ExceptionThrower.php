@@ -4,6 +4,7 @@ namespace Xvilo\OVpayApi\HttpClient\Plugin;
 
 use Http\Client\Common\Plugin;
 use Http\Promise\Promise;
+use JsonException;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Xvilo\OVpayApi\Exception\ApiException;
@@ -26,7 +27,7 @@ final class ExceptionThrower implements Plugin
 
             try {
                 $content = json_decode($response->getBody()->getContents(), true, 512, JSON_THROW_ON_ERROR);
-            } catch (\JsonException) {
+            } catch (JsonException) {
                 $content = $response->getBody()->getContents();
             }
 
