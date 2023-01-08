@@ -10,6 +10,7 @@ use Xvilo\OVpayApi\Exception\UnauthorizedException;
 use Xvilo\OVpayApi\Models\Payment;
 use Xvilo\OVpayApi\Models\Payments;
 use Xvilo\OVpayApi\Models\Receipt\ReceiptTrip;
+use Xvilo\OVpayApi\Models\Token;
 use Xvilo\OVpayApi\Tests\Functional\TestCase;
 
 final class PaymentApiTest extends TestCase
@@ -59,6 +60,9 @@ final class PaymentApiTest extends TestCase
         self::assertNotEmpty($result->getRelatedTrips());
         self::assertCount(1, $result->getRelatedTrips());
         self::assertInstanceOf(ReceiptTrip::class, $result->getRelatedTrips()[0]);
+
+        self::assertEmpty($result->getRelatedBalances());
+        self::assertInstanceOf(Token::class, $result->getToken());
     }
 
     public function testGetReceiptNoAuth(): void
