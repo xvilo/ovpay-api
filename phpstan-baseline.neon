@@ -124,3 +124,18 @@ parameters:
 			message: "#^Parameter \\#1 \\$responseFactory of class Symfony\\\\Component\\\\HttpClient\\\\MockHttpClient constructor expects \\(callable\\(\\)\\: mixed\\)\\|iterable\\<\\(callable\\(\\)\\: mixed\\)\\|Symfony\\\\Contracts\\\\HttpClient\\\\ResponseInterface\\>\\|Symfony\\\\Contracts\\\\HttpClient\\\\ResponseInterface\\|null, \\(callable\\(\\)\\: mixed\\)\\|iterable\\|Symfony\\\\Contracts\\\\HttpClient\\\\ResponseInterface\\|null given\\.$#"
 			count: 1
 			path: tests/Functional/TestCase.php
+
+		-
+			message: "#^Call to an undefined method Lcobucci\\\\JWT\\\\Token\\|PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\:\\:expects\\(\\)\\.$#"
+			count: 2
+			path: tests/Unit/Authentication/TokenMethodTest.php
+
+		-
+			message: "#^Method Xvilo\\\\OVpayApi\\\\Tests\\\\Unit\\\\Authentication\\\\TokenMethodTest\\:\\:tokenExpiredDataProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Unit/Authentication/TokenMethodTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$token of class Xvilo\\\\OVpayApi\\\\Authentication\\\\TokenMethod constructor expects Lcobucci\\\\JWT\\\\Token, Lcobucci\\\\JWT\\\\Token\\|PHPUnit\\\\Framework\\\\MockObject\\\\MockObject given\\.$#"
+			count: 4
+			path: tests/Unit/Authentication/TokenMethodTest.php

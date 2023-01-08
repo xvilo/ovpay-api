@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Xvilo\OVpayApi\Tests\Unit\Authentication;
 
 use Lcobucci\JWT\Token as TokenInterface;
-use Nyholm\Psr7\Request;
 use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Http\Message\RequestInterface;
 use Xvilo\OVpayApi\Authentication\TokenMethod;
@@ -66,7 +65,7 @@ final class TokenMethodTest extends TestCase
         $method->updateRequest($request);
     }
 
-    public function tokenExpiredDataProvider()
+    public function tokenExpiredDataProvider(): array
     {
         return [
             'true' => [true, true],
