@@ -9,7 +9,7 @@ use Xvilo\OVpayApi\Models\Payment;
 use Xvilo\OVpayApi\Models\Receipt;
 use Xvilo\OVpayApi\Models\Token;
 use Xvilo\OVpayApi\Tests\Unit\TestCase;
-use function PHPUnit\Framework\assertEmpty;
+use DateTimeImmutable;
 
 final class ReceiptTest extends TestCase
 {
@@ -21,7 +21,7 @@ final class ReceiptTest extends TestCase
         self::assertEmpty($receipt->getRelatedTrips());
 
         $paymentXbot = Uuid::uuid4()->toString();
-        $dateTime = new \DateTimeImmutable();
+        $dateTime = new DateTimeImmutable();
         $receipt->addRelatedPayment(new Payment(
             'ABCDEFG1234567',
             $paymentXbot,
