@@ -30,6 +30,7 @@ final class TripsApiTest extends TestCase
         self::assertInstanceOf(Trips\TripsItem::class, $trips->getItems()[0]);
         self::assertEquals(null, $trips->getItems()[0]->getCorrectedFrom());
         self::assertEquals(null, $trips->getItems()[0]->getCorrectedFromType());
+        self::assertInstanceOf(Trip::class, $trips->getItems()[0]->getTrip());
     }
 
     public function testGetTripsNoAuth(): void
