@@ -11,7 +11,7 @@ final class PassengerAccountsApi extends AbstractApi
     public function addByServiceReferenceId(string $serviceReferenceId, int $amountInCents): AddedPassengerAccount
     {
         if (str_starts_with($serviceReferenceId, 'NLOV')) {
-            $serviceReferenceId = str_replace('NLOV', '', $serviceReferenceId);
+            $serviceReferenceId = substr($serviceReferenceId, 4);
         }
 
         $uri = sprintf('/api/v1/PassengerAccounts?serviceReferenceId=%s&amountInCents=%s', $serviceReferenceId, $amountInCents);

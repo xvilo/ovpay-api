@@ -29,7 +29,7 @@ final class PassengerAccountsApiTest extends TestCase
 
     public function testUnsuccessfulMatch(): void
     {
-        $paymentServiceReferenceId = '1234567ABCDEFG';
+        $paymentServiceReferenceId = 'NLOV1234567ABCDEFG';
         $amountInCents = 4830;
         $apiClient = $this->getApiClientWithHttpClient($this->getMockHttpClient(
             new MockResponse($this->getFailedAddPassengerAccountResponse($paymentServiceReferenceId, $amountInCents), ['http_code' => 404])
@@ -46,7 +46,7 @@ final class PassengerAccountsApiTest extends TestCase
     public function testUnauthenticatedRequest(): void
     {
         $returnUUid = UUid::uuid4();
-        $paymentServiceReferenceId = '1234567ABCDEFG';
+        $paymentServiceReferenceId = 'NLOV1234567ABCDEFG';
         $amountInCents = 4830;
         $apiClient = $this->getApiClientWithHttpClient($this->getMockHttpClient(
             fn ($method, $url, $options): MockResponse => $this->isAuthenticatedRequest($options['normalized_headers'], sprintf('"%s"', $returnUUid))
@@ -60,7 +60,7 @@ final class PassengerAccountsApiTest extends TestCase
 
     public function testWrongFormat(): void
     {
-        $paymentServiceReferenceId = '12345ABCDEF';
+        $paymentServiceReferenceId = 'NLOV12345ABCDEF';
         $amountInCents = 4830;
 
         $apiClient = $this->getApiClientWithHttpClient($this->getMockHttpClient(
@@ -100,5 +100,36 @@ final class PassengerAccountsApiTest extends TestCase
         $this->expectExceptionMessage('Action not allowed. Not allowed to perform actions on specified xtat.');
         $this->expectExceptionCode(403);
         $apiClient->passengerAccounts()->deletePassengerAccount($cardXtat->toString());
+    }
+
+    /**
+     * @dataProvider paymentServiceReferenceIdProvider()
+     */
+    public function testCorrectPaymentServiceReferenceIdClean(
+        string $expected,
+        string $paymentServiceReferenceId
+    ): void {
+        $apiClient = $this->getApiClientWithHttpClient($this->getMockHttpClient(
+            static function ($method, $url, $options) use ($expected): \Symfony\Component\HttpClient\Response\MockResponse {
+                self::assertMatchesRegularExpression(sprintf('/\?serviceReferenceId=%s/', $expected), $url);
+
+                return new MockResponse(sprintf('"%s"', Uuid::uuid4()->toString()));
+            }
+        ));
+
+        $apiClient->Authenticate(new HeaderMethod('Authorization', 'Bearer TEST'));
+        $apiClient->passengerAccounts()->addByServiceReferenceId($paymentServiceReferenceId, 2023);
+    }
+
+    /**
+     * @return array<string, array<int, string>>
+     */
+    public function paymentServiceReferenceIdProvider(): array
+    {
+        return [
+            'Correct clean' => ['12345ABCDEF', 'NLOV12345ABCDEF'],
+            'No clean needed' => ['12345ABCDEF', '12345ABCDEF'],
+            'Only clean at beginning' => ['12345NLOVEF', '12345NLOVEF'],
+        ];
     }
 }
