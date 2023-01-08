@@ -25,6 +25,7 @@ use Lcobucci\JWT\Encoding\JoseEncoder;
 use Lcobucci\JWT\Token\Parser;
 use Xvilo\OVpayApi\Authentication\TokenMethod;
 use Xvilo\OVpayApi\Client;
+use Xvilo\OVpayApi\Models\Trip;
 
 // Include dependencies
 include 'vendor/autoload.php';
@@ -36,65 +37,65 @@ $parser = new Parser(new JoseEncoder());
 $client = new Client();
 $client->Authenticate(new TokenMethod($parser->parse('eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIs...')));
 
+// Get payment cards
+$card = $client->tokens()->getPaymentCards()[0];
 // Get trips for specified Card xtat UUID 
-$trips = $client->trips()->getTrips('12a12a1a-1a12-1234-1a12-1a123ab1ab12');
+$trips = $client->trips()->getTrips($card->getXtat());
 // Get last trip
-$trip = end($trips['items']);
+$items = $trips->getItems();
+/** @var Trip $trip */
+$trip = end($items)->getTrip();
 // Get trip details by ID
-var_dump($client->trips()->getTrip($trip['trip']['xbot'], $trip['trip']['id']));
-//    array(5) {
-//        ["token"]=>
-//      array(4) {
-//            ["mediumType"]=>
-//        string(3) "Emv"
-//            ["xbot"]=>
-//        string(36) "12a12a1a-1a12-1234-1a12-1a123ab1ab12"
-//            ["status"]=>
-//        string(6) "Active"
-//            ["personalization"]=>
-//        array(3) {
-//                ["name"]=>
-//          string(0) ""
-//                ["color"]=>
-//          string(4) "Pink"
-//                ["medium"]=>
-//          string(12) "PhysicalCard"
-//        }
-//      }
-//      ["correctionOptions"]=>
-//      NULL
-//      ["trip"]=>
-//      array(13) {
-//            ["xbot"]=>
-//        string(36) "12a12a1a-1a12-1234-1a12-1a123ab1ab12"
-//            ["id"]=>
-//        int(12345678)
-//        ["version"]=>
+var_dump($client->trips()->getTrip($trip->getXbot(), $trip->getId()));
+//  class Xvilo\OVpayApi\Models\Receipt\ReceiptTrip#94 (4) {
+//    private readonly ?array $correctionOptions =>
+//    NULL
+//    private readonly Xvilo\OVpayApi\Models\Trip $trip =>
+//    class Xvilo\OVpayApi\Models\Trip#131 (13) {
+//      private readonly string $xbot =>
+//      string(36) "8126d60f-bded-46d3-9a70-30915a61008b"
+//      private readonly int $id =>
+//      int(12345678)
+//      private readonly int $version =>
+//      int(1)
+//      private readonly string $transport =>
+//      string(4) "RAIL"
+//      private readonly string $status =>
+//      string(8) "COMPLETE"
+//      private readonly string $checkInLocation =>
+//      string(16) "Utrecht Centraal"
+//      private readonly DateTimeImmutable $checkInTimestamp =>
+//      class DateTimeImmutable#79 (3) {
+//        public $date =>
+//        string(26) "2022-12-30 08:55:30.000000"
+//        public $timezone_type =>
 //        int(1)
-//        ["transport"]=>
-//        string(4) "RAIL"
-//            ["status"]=>
-//        string(8) "COMPLETE"
-//            ["checkInLocation"]=>
-//        string(16) "Utrecht Centraal"
-//            ["checkInTimestamp"]=>
-//        string(25) "2022-12-30T01:02:03+01:00"
-//            ["checkOutLocation"]=>
-//        string(5) "Baarn"
-//            ["checkOutTimestamp"]=>
-//        string(25) "2022-12-30T02:03:04+01:00"
-//            ["currency"]=>
-//        string(3) "EUR"
-//            ["fare"]=>
-//        int(540)
-//        ["organisationName"]=>
-//        string(2) "NS"
-//            ["loyaltyOrDiscount"]=>
-//        bool(false)
+//        public $timezone =>
+//        string(6) "+01:00"
 //      }
-//      ["correctedFrom"]=>
-//      NULL
-//      ["correctedFromType"]=>
-//      NULL
+//      private readonly ?string $checkOutLocation =>
+//      string(5) "Baarn"
+//      private readonly ?DateTimeImmutable $checkOutTimestamp =>
+//      class DateTimeImmutable#101 (3) {
+//        public $date =>
+//        string(26) "2022-12-30 09:45:30.000000"
+//        public $timezone_type =>
+//        int(1)
+//        public $timezone =>
+//        string(6) "+01:00"
+//      }
+//      private readonly string $currency =>
+//      string(3) "EUR"
+//      private readonly int $fare =>
+//      int(540)
+//      private readonly string $organisationName =>
+//      string(2) "NS"
+//      private readonly bool $loyaltyOrDiscount =>
+//      bool(false)
 //    }
+//    private readonly mixed $correctedFrom =>
+//    NULL
+//    private readonly mixed $correctedFromType =>
+//    NULL
+//  }
 ```

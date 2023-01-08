@@ -16,8 +16,8 @@ final class Trip
         private readonly string $status,
         private readonly string $checkInLocation,
         private readonly DateTimeImmutable $checkInTimestamp,
-        private readonly string $checkOutLocation,
-        private readonly DateTimeImmutable $checkOutTimestamp,
+        private readonly ?string $checkOutLocation,
+        private readonly ?DateTimeImmutable $checkOutTimestamp,
         private readonly string $currency,
         private readonly int $fare,
         private readonly string $organisationName,
@@ -60,12 +60,12 @@ final class Trip
         return $this->checkInTimestamp;
     }
 
-    public function getCheckOutLocation(): string
+    public function getCheckOutLocation(): ?string
     {
         return $this->checkOutLocation;
     }
 
-    public function getCheckOutTimestamp(): DateTimeImmutable
+    public function getCheckOutTimestamp(): ?DateTimeImmutable
     {
         return $this->checkOutTimestamp;
     }
