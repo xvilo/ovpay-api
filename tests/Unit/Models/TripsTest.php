@@ -28,7 +28,6 @@ final class TripsTest extends TestCase
     {
         $item = new TripsItem(
             new Trip(
-                '13fa524a-14e3-4fb4-ba28-cbc56bac45ea',
                 1,
                 1,
                 'RAIL',
@@ -40,7 +39,8 @@ final class TripsTest extends TestCase
                 'EUR',
                 0,
                 'phpunit',
-                false
+                false,
+            '13fa524a-14e3-4fb4-ba28-cbc56bac45ea',
             ),
             new DateTimeImmutable(), null
         );
@@ -53,7 +53,6 @@ final class TripsTest extends TestCase
     {
         $item = new TripsItem(
             new Trip(
-                '13fa524a-14e3-4fb4-ba28-cbc56bac45ea',
                 1,
                 1,
                 'RAIL',
@@ -65,7 +64,8 @@ final class TripsTest extends TestCase
                 'EUR',
                 0,
                 'phpunit',
-                false
+                false,
+                '13fa524a-14e3-4fb4-ba28-cbc56bac45ea',
             ),
             new DateTimeImmutable(), null
         );
@@ -73,7 +73,6 @@ final class TripsTest extends TestCase
 
         $itemTwo = new TripsItem(
             new Trip(
-                '1234567-14e3-4fb4-ba28-cbc56bac45ea',
                 2,
                 1,
                 'RAIL',
@@ -85,7 +84,8 @@ final class TripsTest extends TestCase
                 'EUR',
                 0,
                 'phpunit',
-                false
+                false,
+                '1234567-14e3-4fb4-ba28-cbc56bac45ea',
             ),
             new DateTimeImmutable(), null
         );

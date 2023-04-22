@@ -196,4 +196,130 @@ JSON;
 }
 JSON;
     }
+
+    protected function getAnonymousReceiptResponse()
+    {
+        return <<<JSON
+{
+    "relatedPayments": [
+        {
+            "id": "EVENT-O17-36531698595777159242023041103",
+            "status": "Ok",
+            "transactionTimestamp": "2023-04-11T03:42:55+02:00",
+            "transactionType": "Trip",
+            "amount": -1256,
+            "amountDue": -1256,
+            "currency": "EUR",
+            "paymentMethod": "EMV",
+            "rejectionReason": null,
+            "loyaltyOrDiscount": false
+        }
+    ],
+    "relatedTrips": [
+        {
+            "correctionOptions": null,
+            "ageDiscounts": [],
+            "trip": {
+                "id": 130792415,
+                "version": 1,
+                "transport": "BUS",
+                "status": "COMPLETE",
+                "checkInLocation": "City 1, Stop 3",
+                "checkInTimestamp": "2023-03-20T13:41:20+02:00",
+                "checkOutLocation": "City 1, Stop 1",
+                "checkOutTimestamp": "2023-03-20T13:47:42+02:00",
+                "currency": "EUR",
+                "fare": 46,
+                "organisationName": "Qbuzz",
+                "loyaltyOrDiscount": false
+            },
+            "correctedFrom": null,
+            "correctedFromType": null
+        },
+        {
+            "correctionOptions": {
+                "correctableStatus": "CorrectableNoStops",
+                "stops": [
+                    {
+                        "privateCode": "45526",
+                        "localizedNames": [
+                            {
+                                "language": "nl-NL",
+                                "text": "City 1, Stop 2"
+                            },
+                            {
+                                "language": "en-US",
+                                "text": "City 1, Stop 2"
+                            }
+                        ]
+                    }
+                ],
+                "onboardValidation": true,
+                "correctionWindowStart": "2023-04-15T13:34:03+02:00",
+                "correctionWindowEnd": "2023-06-10T00:00:00+02:00"
+            },
+            "ageDiscounts": [],
+            "trip": {
+                "id": 130788476,
+                "version": 1,
+                "transport": "BUS",
+                "status": "CKOMISSING",
+                "checkInLocation": "City 1, Stop 2",
+                "checkInTimestamp": "2023-03-20T13:34:03+02:00",
+                "checkOutLocation": null,
+                "checkOutTimestamp": null,
+                "currency": "EUR",
+                "fare": 400,
+                "organisationName": "Qbuzz",
+                "loyaltyOrDiscount": false
+            },
+            "correctedFrom": null,
+            "correctedFromType": null
+        },
+        {
+            "correctionOptions": null,
+            "ageDiscounts": [],
+            "trip": {
+                "id": 130741574,
+                "version": 1,
+                "transport": "BUS",
+                "status": "COMPLETE",
+                "checkInLocation": "City 2, Stop 2",
+                "checkInTimestamp": "2023-03-20T11:52:26+02:00",
+                "checkOutLocation": "City 2, Stop 2",
+                "checkOutTimestamp": "2023-03-20T13:13:21+02:00",
+                "currency": "EUR",
+                "fare": 525,
+                "organisationName": "Qbuzz",
+                "loyaltyOrDiscount": false
+            },
+            "correctedFrom": null,
+            "correctedFromType": null
+        },
+        {
+            "correctionOptions": null,
+            "ageDiscounts": [],
+            "trip": {
+                "id": 130734220,
+                "version": 1,
+                "transport": "BUS",
+                "status": "COMPLETE",
+                "checkInLocation": "City 1, Stop 1",
+                "checkInTimestamp": "2023-03-20T11:34:45+02:00",
+                "checkOutLocation": "City 2, Stop 1",
+                "checkOutTimestamp": "2023-03-20T11:51:49+02:00",
+                "currency": "EUR",
+                "fare": 285,
+                "organisationName": "Qbuzz",
+                "loyaltyOrDiscount": false
+            },
+            "correctedFrom": null,
+            "correctedFromType": null
+        }
+    ],
+    "relatedBalances": []
+}
+JSON;
+
+    }
 }

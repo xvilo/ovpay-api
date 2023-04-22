@@ -24,8 +24,6 @@ final class ReceiptTest extends TestCase
         $paymentXbot = Uuid::uuid4()->toString();
         $dateTime = new DateTimeImmutable();
         $receipt->addRelatedPayment(new Payment(
-            'ABCDEFG1234567',
-            $paymentXbot,
             '1234',
             'COMPLETED',
             $dateTime,
@@ -35,7 +33,9 @@ final class ReceiptTest extends TestCase
             'EUR',
             'Emv',
             null,
-            false
+            false,
+            'ABCDEFG1234567',
+            $paymentXbot,
         ));
         self::assertCount(1, $receipt->getRelatedPayments());
         self::assertEquals('ABCDEFG1234567', $receipt->getRelatedPayments()[0]->getServiceReferenceId());
@@ -63,7 +63,6 @@ final class ReceiptTest extends TestCase
         $receipt->addRelatedTrip(new Receipt\ReceiptTrip(
             [],
             new Trip(
-                $tripXbot,
                 1234,
                 1,
                 'RAIL',
@@ -76,6 +75,7 @@ final class ReceiptTest extends TestCase
                 10,
                 'NS',
                 true,
+                $tripXbot,
             ),
             null,
             null,
