@@ -9,7 +9,6 @@ use DateTimeImmutable;
 final class Trip
 {
     public function __construct(
-        private readonly string $xbot,
         private readonly int $id,
         private readonly int $version,
         private readonly string $transport,
@@ -22,10 +21,11 @@ final class Trip
         private readonly int $fare,
         private readonly string $organisationName,
         private readonly bool $loyaltyOrDiscount,
+        private readonly ?string $xbot = null,
     ) {
     }
 
-    public function getXbot(): string
+    public function getXbot(): ?string
     {
         return $this->xbot;
     }
