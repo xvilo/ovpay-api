@@ -33,6 +33,7 @@
     "config": {
         "allow-plugins": {
             "php-http/discovery": true
-        }
+        },
+        "platform-check": false
     }
 }
