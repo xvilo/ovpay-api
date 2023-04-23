@@ -73,6 +73,7 @@ final class AnonymousApiTest extends TestCase
                 self::assertEquals('CorrectableNoStops', $correctionOptions->getCorrectableStatus());
                 self::assertInstanceOf(DateTimeImmutable::class, $correctionOptions->getCorrectionWindowEnd());
                 self::assertInstanceOf(DateTimeImmutable::class, $correctionOptions->getCorrectionWindowStart());
+                self::assertTrue($correctionOptions->isOnboardValidation());
                 self::assertIsArray($correctionOptions->getStops());
                 self::assertCount(1, $correctionOptions->getStops());
 
