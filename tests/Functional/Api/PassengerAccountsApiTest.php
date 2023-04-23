@@ -102,9 +102,7 @@ final class PassengerAccountsApiTest extends TestCase
         $apiClient->passengerAccounts()->deletePassengerAccount($cardXtat->toString());
     }
 
-    /**
-     * @dataProvider paymentServiceReferenceIdProvider()
-     */
+    #[\PHPUnit\Framework\Attributes\DataProvider('paymentServiceReferenceIdProvider')]
     public function testCorrectPaymentServiceReferenceIdClean(
         string $expected,
         string $paymentServiceReferenceId
@@ -124,7 +122,7 @@ final class PassengerAccountsApiTest extends TestCase
     /**
      * @return array<string, array<int, string>>
      */
-    public function paymentServiceReferenceIdProvider(): array
+    public static function paymentServiceReferenceIdProvider(): array
     {
         return [
             'Correct clean' => ['12345ABCDEF', 'NLOV12345ABCDEF'],

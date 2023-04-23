@@ -12,9 +12,7 @@ use Xvilo\OVpayApi\Tests\Unit\TestCase;
 
 final class TokenMethodTest extends TestCase
 {
-    /**
-     * @dataProvider tokenExpiredDataProvider
-     */
+    #[\PHPUnit\Framework\Attributes\DataProvider('tokenExpiredDataProvider')]
     public function testIsExpired(bool $input, bool $expected): void
     {
         $token = $this->getTokenMock();
@@ -47,9 +45,7 @@ final class TokenMethodTest extends TestCase
 
     public function testUpdateRequest(): void
     {
-        $request = $this->getMockBuilder(RequestInterface::class)
-            ->setMethods(['withHeader', 'getRequestTarget', 'withRequestTarget', 'getMethod', 'withMethod', 'getUri', 'withUri', 'getProtocolVersion', 'withProtocolVersion', 'getHeaders', 'hasHeader', 'getHeader', 'getHeaderLine', 'withAddedHeader', 'withoutHeader', 'getBody', 'withBody'])
-            ->getMock();
+        $request = $this->createMock(RequestInterface::class);
 
         $request->expects($this->once())
             ->method('withHeader')
@@ -65,7 +61,7 @@ final class TokenMethodTest extends TestCase
         $method->updateRequest($request);
     }
 
-    public function tokenExpiredDataProvider(): array
+    public static function tokenExpiredDataProvider(): array
     {
         return [
             'true' => [true, true],
@@ -75,8 +71,6 @@ final class TokenMethodTest extends TestCase
 
     private function getTokenMock(): MockObject|TokenInterface
     {
-        return $this->getMockBuilder(TokenInterface::class)
-            ->setMethods(['headers', 'isPermittedFor', 'isIdentifiedBy', 'isRelatedTo', 'hasBeenIssuedBy', 'hasBeenIssuedBefore', 'isMinimumTimeBefore', 'isExpired', 'toString'])
-            ->getMock();
+        return $this->createMock(TokenInterface::class);
     }
 }
