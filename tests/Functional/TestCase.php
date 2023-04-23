@@ -197,7 +197,7 @@ JSON;
 JSON;
     }
 
-    protected function getAnonymousReceiptResponse()
+    protected function getAnonymousReceiptResponse(): string
     {
         return <<<JSON
 {
@@ -320,6 +320,5 @@ JSON;
     "relatedBalances": []
 }
 JSON;
-
     }
 }

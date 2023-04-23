@@ -19,14 +19,12 @@ final class CorrectionOptions
     ) {
     }
 
-    /**
-     * @return string
-     */
     public function getCorrectableStatus(): string
     {
         return $this->correctableStatus;
     }
 
+    /** @return Stop[] */
     public function getStops(): array
     {
         return $this->stops;
@@ -37,25 +35,16 @@ final class CorrectionOptions
         $this->stops[] = $stop;
     }
 
-    /**
-     * @return bool
-     */
     public function isOnboardValidation(): bool
     {
         return $this->onboardValidation;
     }
 
-    /**
-     * @return DateTimeImmutable
-     */
     public function getCorrectionWindowStart(): DateTimeImmutable
     {
         return $this->correctionWindowStart;
     }
 
-    /**
-     * @return DateTimeImmutable
-     */
     public function getCorrectionWindowEnd(): DateTimeImmutable
     {
         return $this->correctionWindowEnd;

@@ -8,7 +8,7 @@ final class Stop
 {
     public function __construct(
         private readonly string $privateCode,
-        /** @var LocalizedName[] $relatedTrips */
+        /** @var LocalizedName[] $localizedNames */
         private array $localizedNames,
     ) {
     }
@@ -18,6 +18,8 @@ final class Stop
         return $this->privateCode;
     }
 
+
+    /** @return LocalizedName[] */
     public function getLocalizedNames(): array
     {
         return $this->localizedNames;

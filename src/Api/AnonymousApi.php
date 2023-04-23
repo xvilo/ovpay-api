@@ -36,7 +36,7 @@ final class AnonymousApi extends AbstractApi
         return $this->client->getSerializer()->deserialize(
             $this->get('/api/anonymous/v1/payments/receipt', [
                 'serviceReferenceId' => $serviceReferenceId,
-                'amountInCents' => $amountInCents
+                'amountInCents' => $amountInCents,
             ]),
             Receipt::class,
             'json'
