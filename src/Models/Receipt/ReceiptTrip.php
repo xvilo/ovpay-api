@@ -4,19 +4,20 @@ declare(strict_types=1);
 
 namespace Xvilo\OVpayApi\Models\Receipt;
 
+use Xvilo\OVpayApi\Models\CorrectionOptions;
 use Xvilo\OVpayApi\Models\Trip;
 
 final class ReceiptTrip
 {
     public function __construct(
-        private readonly ?array $correctionOptions,
+        private readonly ?CorrectionOptions $correctionOptions,
         private readonly Trip $trip,
         private readonly mixed $correctedFrom,
         private readonly mixed $correctedFromType,
     ) {
     }
 
-    public function getCorrectionOptions(): ?array
+    public function getCorrectionOptions(): ?CorrectionOptions
     {
         return $this->correctionOptions;
     }

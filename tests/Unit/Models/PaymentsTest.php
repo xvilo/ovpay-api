@@ -25,8 +25,6 @@ final class PaymentsTest extends TestCase
         $uuid = Uuid::uuid4()->toString();
         $time = new DateTimeImmutable();
         $payments->addItem(new Payment(
-            'ABCDEFG1234567',
-            $uuid,
             '12345',
             'PAYED',
             $time,
@@ -37,6 +35,8 @@ final class PaymentsTest extends TestCase
             'EMV',
             '',
             false,
+            'ABCDEFG1234567',
+            $uuid,
         ));
         self::assertCount(1, $payments->getItems());
         self::assertEquals($uuid, $payments->getItems()[0]->getXbot());

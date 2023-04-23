@@ -51,36 +51,6 @@ parameters:
 			path: src/Api/AbstractApi.php
 
 		-
-			message: "#^Method Xvilo\\\\OVpayApi\\\\Api\\\\AnonymousApi\\:\\:getNotices\\(\\) should return Xvilo\\\\OVpayApi\\\\Models\\\\Notices but returns object\\.$#"
-			count: 1
-			path: src/Api/AnonymousApi.php
-
-		-
-			message: "#^Method Xvilo\\\\OVpayApi\\\\Api\\\\PassengerAccountsApi\\:\\:addByServiceReferenceId\\(\\) should return Xvilo\\\\OVpayApi\\\\Models\\\\AddedPassengerAccount but returns object\\.$#"
-			count: 1
-			path: src/Api/PassengerAccountsApi.php
-
-		-
-			message: "#^Method Xvilo\\\\OVpayApi\\\\Api\\\\PaymentApi\\:\\:getPayments\\(\\) should return Xvilo\\\\OVpayApi\\\\Models\\\\Payments but returns object\\.$#"
-			count: 1
-			path: src/Api/PaymentApi.php
-
-		-
-			message: "#^Method Xvilo\\\\OVpayApi\\\\Api\\\\PaymentApi\\:\\:getReceipt\\(\\) should return Xvilo\\\\OVpayApi\\\\Models\\\\Receipt but returns object\\.$#"
-			count: 1
-			path: src/Api/PaymentApi.php
-
-		-
-			message: "#^Method Xvilo\\\\OVpayApi\\\\Api\\\\TripsApi\\:\\:getTrip\\(\\) should return Xvilo\\\\OVpayApi\\\\Models\\\\Receipt\\\\ReceiptTrip but returns object\\.$#"
-			count: 1
-			path: src/Api/TripsApi.php
-
-		-
-			message: "#^Method Xvilo\\\\OVpayApi\\\\Api\\\\TripsApi\\:\\:getTrips\\(\\) should return Xvilo\\\\OVpayApi\\\\Models\\\\Trips but returns object\\.$#"
-			count: 1
-			path: src/Api/TripsApi.php
-
-		-
 			message: "#^Method Xvilo\\\\OVpayApi\\\\Models\\\\Payments\\:\\:getItems\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Models/Payments.php
@@ -94,16 +64,6 @@ parameters:
 			message: "#^Method Xvilo\\\\OVpayApi\\\\Models\\\\Receipt\\:\\:getRelatedBalances\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Models/Receipt.php
-
-		-
-			message: "#^Method Xvilo\\\\OVpayApi\\\\Models\\\\Receipt\\\\ReceiptTrip\\:\\:__construct\\(\\) has parameter \\$correctionOptions with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Models/Receipt/ReceiptTrip.php
-
-		-
-			message: "#^Method Xvilo\\\\OVpayApi\\\\Models\\\\Receipt\\\\ReceiptTrip\\:\\:getCorrectionOptions\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Models/Receipt/ReceiptTrip.php
 
 		-
 			message: "#^Method Xvilo\\\\OVpayApi\\\\Tests\\\\Functional\\\\Api\\\\AnonymousApiTest\\:\\:registrationOpenDataProvider\\(\\) return type has no value type specified in iterable type array\\.$#"

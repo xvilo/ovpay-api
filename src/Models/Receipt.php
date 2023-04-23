@@ -14,7 +14,7 @@ final class Receipt
         /** @var ReceiptTrip[] $relatedTrips */
         private array $relatedTrips,
         private readonly array $relatedBalances,
-        private readonly Token $token
+        private readonly ?Token $token = null,
     ) {
     }
 
@@ -49,7 +49,7 @@ final class Receipt
         return $this->relatedBalances;
     }
 
-    public function getToken(): Token
+    public function getToken(): ?Token
     {
         return $this->token;
     }

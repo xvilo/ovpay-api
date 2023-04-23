@@ -9,8 +9,6 @@ use DateTimeImmutable;
 final class Payment
 {
     public function __construct(
-        private readonly string $serviceReferenceId,
-        private readonly string $xbot,
         private readonly string $id,
         private readonly string $status,
         private readonly DateTimeImmutable $transactionTimestamp,
@@ -21,15 +19,17 @@ final class Payment
         private readonly string $paymentMethod,
         private readonly mixed $rejectionReason,
         private readonly bool $loyaltyOrDiscount,
+        private readonly ?string $serviceReferenceId = null,
+        private readonly ?string $xbot = null,
     ) {
     }
 
-    public function getServiceReferenceId(): string
+    public function getServiceReferenceId(): ?string
     {
         return $this->serviceReferenceId;
     }
 
-    public function getXbot(): string
+    public function getXbot(): ?string
     {
         return $this->xbot;
     }

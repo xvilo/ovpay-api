@@ -6,6 +6,7 @@ namespace Xvilo\OVpayApi\Tests\Functional\Api;
 
 use DateTimeImmutable;
 use Symfony\Component\HttpClient\Response\MockResponse;
+use Xvilo\OVpayApi\Models\CorrectionOptions;
 use Xvilo\OVpayApi\Models\Notices;
 use Xvilo\OVpayApi\Tests\Functional\TestCase;
 
@@ -53,5 +54,36 @@ final class AnonymousApiTest extends TestCase
             'false-in-array' => ['data' => '[false]', 'expected' => false],
             'random' => ['data' => '{"foo": "bar"}', 'expected' => false],
         ];
+    }
+
+    public function testGetReceipt(): void
+    {
+        $apiClient = $this->getApiClientWithHttpClient($this->getMockHttpClient(new MockResponse($this->getAnonymousReceiptResponse())));
+
+        $res = $apiClient->anonymous()->getReceipt('ABCD', 0000);
+        self::assertCount(1, $res->getRelatedPayments());
+        self::assertCount(4, $res->getRelatedTrips());
+        self::assertCount(0, $res->getRelatedBalances());
+        self::assertNull($res->getToken());
+
+        foreach ($res->getRelatedTrips() as $relatedTrip) {
+            if ($relatedTrip->getTrip()->getId() === 130788476) {
+                $correctionOptions = $relatedTrip->getCorrectionOptions();
+                self::assertInstanceOf(CorrectionOptions::class, $correctionOptions);
+                self::assertEquals('CorrectableNoStops', $correctionOptions->getCorrectableStatus());
+                self::assertInstanceOf(DateTimeImmutable::class, $correctionOptions->getCorrectionWindowEnd());
+                self::assertInstanceOf(DateTimeImmutable::class, $correctionOptions->getCorrectionWindowStart());
+                self::assertTrue($correctionOptions->isOnboardValidation());
+                self::assertIsArray($correctionOptions->getStops());
+                self::assertCount(1, $correctionOptions->getStops());
+
+                self::assertEquals('45526', $correctionOptions->getStops()[0]->getPrivateCode());
+                self::assertCount(2, $correctionOptions->getStops()[0]->getLocalizedNames());
+                self::assertEquals('nl-NL', $correctionOptions->getStops()[0]->getLocalizedNames()[0]->getLanguage());
+                self::assertEquals('City 1, Stop 2', $correctionOptions->getStops()[0]->getLocalizedNames()[0]->getText());
+                self::assertEquals('en-US', $correctionOptions->getStops()[0]->getLocalizedNames()[1]->getLanguage());
+                self::assertEquals('City 1, Stop 2', $correctionOptions->getStops()[0]->getLocalizedNames()[1]->getText());
+            }
+        }
     }
 }
