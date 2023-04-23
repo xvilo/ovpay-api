@@ -18,7 +18,6 @@ final class Stop
         return $this->privateCode;
     }
 
-
     /** @return LocalizedName[] */
     public function getLocalizedNames(): array
     {
