@@ -30,7 +30,7 @@ final class TokenRefresherTest extends TestCase
     /**
      * @return array<string, array<string, array<string,string>|bool|DateTimeImmutable|float|int|Plain|string|null>>
      */
-    public function inputDataProvider(): array
+    public static function inputDataProvider(): array
     {
         return [
             'With token interface' => ['input' => new Plain(new TokenInterface\DataSet([], 'empty'), new TokenInterface\DataSet([], 'empty'), new TokenInterface\Signature('aa', 'bb')), 'throws' => false],

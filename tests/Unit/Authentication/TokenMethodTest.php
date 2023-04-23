@@ -65,7 +65,7 @@ final class TokenMethodTest extends TestCase
         $method->updateRequest($request);
     }
 
-    public function tokenExpiredDataProvider(): array
+    public static function tokenExpiredDataProvider(): array
     {
         return [
             'true' => [true, true],

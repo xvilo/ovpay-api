@@ -124,7 +124,7 @@ final class PassengerAccountsApiTest extends TestCase
     /**
      * @return array<string, array<int, string>>
      */
-    public function paymentServiceReferenceIdProvider(): array
+    public static function paymentServiceReferenceIdProvider(): array
     {
         return [
             'Correct clean' => ['12345ABCDEF', 'NLOV12345ABCDEF'],
