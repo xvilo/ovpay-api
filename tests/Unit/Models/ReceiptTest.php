@@ -61,7 +61,7 @@ final class ReceiptTest extends TestCase
 
         $tripXbot = Uuid::uuid4()->toString();
         $receipt->addRelatedTrip(new Receipt\ReceiptTrip(
-            [],
+            null,
             new Trip(
                 1234,
                 1,
