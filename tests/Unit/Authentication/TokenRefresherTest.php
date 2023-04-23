@@ -13,9 +13,7 @@ use Lcobucci\JWT\Token as TokenInterface;
 
 final class TokenRefresherTest extends TestCase
 {
-    /**
-     * @dataProvider inputDataProvider
-     */
+    #[\PHPUnit\Framework\Attributes\DataProvider('inputDataProvider')]
     public function testTokenInterfaceCheck(mixed $input, bool $throws): void
     {
         if ($throws) {

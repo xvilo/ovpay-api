@@ -102,9 +102,7 @@ final class PassengerAccountsApiTest extends TestCase
         $apiClient->passengerAccounts()->deletePassengerAccount($cardXtat->toString());
     }
 
-    /**
-     * @dataProvider paymentServiceReferenceIdProvider()
-     */
+    #[\PHPUnit\Framework\Attributes\DataProvider('paymentServiceReferenceIdProvider')]
     public function testCorrectPaymentServiceReferenceIdClean(
         string $expected,
         string $paymentServiceReferenceId

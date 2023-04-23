@@ -34,9 +34,7 @@ final class AnonymousApiTest extends TestCase
         self::assertEquals([], $res->getPrivacyStatement()->getHighlights());
     }
 
-    /**
-     * @dataProvider registrationOpenDataProvider
-     */
+    #[\PHPUnit\Framework\Attributes\DataProvider('registrationOpenDataProvider')]
     public function testIsRegistrationOpen(string $data, bool $expected): void
     {
         $apiClient = $this->getApiClientWithHttpClient(

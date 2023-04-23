@@ -21,9 +21,7 @@ final class AuthMethodPluginTest extends TestCase
         $request = new Request('GET', 'https://api.ovpay.app/v1/');
         $promise = new HttpFulfilledPromise($response);
 
-        $authMethod = $this->getMockBuilder(AuthMethod::class)
-            ->setMethods(['isExpired', 'setToken', 'getToken', 'updateRequest'])
-            ->getMock();
+        $authMethod = $this->createMock(AuthMethod::class);
 
         $authMethod->expects($this->once())
             ->method('isExpired')
@@ -38,9 +36,7 @@ final class AuthMethodPluginTest extends TestCase
         $authMethod->expects($this->once())
             ->method('updateRequest');
 
-        $refresher = $this->getMockBuilder(Refresher::class)
-            ->setMethods(['refresh'])
-            ->getMock();
+        $refresher = $this->createMock(Refresher::class);
 
         $refresher->expects($this->once())
             ->method('refresh');
