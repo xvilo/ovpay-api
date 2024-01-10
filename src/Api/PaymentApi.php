@@ -9,10 +9,10 @@ use Xvilo\OVpayApi\Models\Receipt;
 
 final class PaymentApi extends AbstractApi
 {
-    public function getPayments(string $cardXtatUuid): Payments
+    public function getPayments(string $cardExternalTransitAccountToken): Payments
     {
         return $this->client->getSerializer()->deserialize(
-            $this->get(sprintf('/api/v1/Payments/%s', $cardXtatUuid), ['offset' => 0]),
+            $this->get(sprintf('/api/v1/Payments/%s', $cardExternalTransitAccountToken), ['offset' => 0]),
             Payments::class,
             'json'
         );

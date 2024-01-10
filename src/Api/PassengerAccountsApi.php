@@ -23,9 +23,9 @@ final class PassengerAccountsApi extends AbstractApi
         );
     }
 
-    public function deletePassengerAccount(string $paymentCardXtat): bool
+    public function deletePassengerAccount(string $cardExternalTransitAccountToken): bool
     {
-        $this->delete(sprintf('/api/v1/PassengerAccounts/%s', $paymentCardXtat));
+        $this->delete(sprintf('/api/v1/PassengerAccounts/%s', $cardExternalTransitAccountToken));
 
         return true;
     }

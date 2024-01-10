@@ -13,6 +13,7 @@ final class Token
         private readonly string $xbot,
         private readonly string $status,
         private readonly TokenPersonalization $personalization,
+        /** xtat = External Transit Account Token */
         private readonly ?string $xtat = null,
     ) {
     }
@@ -37,7 +38,7 @@ final class Token
         return $this->personalization;
     }
 
-    public function getXtat(): ?string
+    public function getExternalTransitAccountToken(): ?string
     {
         return $this->xtat;
     }
