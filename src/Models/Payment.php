@@ -20,6 +20,7 @@ final class Payment
         private readonly mixed $rejectionReason,
         private readonly bool $loyaltyOrDiscount,
         private readonly ?string $serviceReferenceId = null,
+        /** xbot = External Back Office Token */
         private readonly ?string $xbot = null,
     ) {
     }
@@ -29,7 +30,7 @@ final class Payment
         return $this->serviceReferenceId;
     }
 
-    public function getXbot(): ?string
+    public function getExternalBackOfficeToken(): ?string
     {
         return $this->xbot;
     }

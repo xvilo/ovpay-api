@@ -18,10 +18,10 @@ final class PaymentApi extends AbstractApi
         );
     }
 
-    public function getReceipt(string $paymentXbot, string $paymentId): Receipt
+    public function getReceipt(string $paymentExternalBackOfficeToken, string $paymentId): Receipt
     {
         return $this->client->getSerializer()->deserialize(
-            $this->get(sprintf('/api/v1/Payments/receipt/%s/%s', $paymentXbot, $paymentId)),
+            $this->get(sprintf('/api/v1/Payments/receipt/%s/%s', $paymentExternalBackOfficeToken, $paymentId)),
             Receipt::class,
             'json'
         );
