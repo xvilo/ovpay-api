@@ -17,6 +17,7 @@ For now only the unauthenticated API routes are available, but more will follow.
 ### Example:
 
 Request trips, then request trip details:
+
 ```php
 <?php
 declare(strict_types=1);
@@ -40,7 +41,7 @@ $client->Authenticate(new TokenMethod($parser->parse('eyJ0eXAiOiJKV1QiLCJhbGciOi
 // Get payment cards
 $card = $client->tokens()->getPaymentCards()[0];
 // Get trips for specified Card xtat UUID 
-$trips = $client->trips()->getTrips($card->getXtat());
+$trips = $client->trips()->getTrips($card->getExternalTransitAccountToken());
 // Get last trip
 $items = $trips->getItems();
 /** @var Trip $trip */

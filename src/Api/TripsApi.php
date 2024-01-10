@@ -9,10 +9,10 @@ use Xvilo\OVpayApi\Models\Trips;
 
 final class TripsApi extends AbstractApi
 {
-    public function getTrips(string $cardXtatUuid, int $offset = 0): Trips
+    public function getTrips(string $cardExternalTransitAccountToken, int $offset = 0): Trips
     {
         return $this->client->getSerializer()->deserialize(
-            $this->get(sprintf('/api/v3/Trips/%s', $cardXtatUuid), ['offset' => $offset]),
+            $this->get(sprintf('/api/v3/Trips/%s', $cardExternalTransitAccountToken), ['offset' => $offset]),
             Trips::class,
             'json'
         );
