@@ -21,7 +21,7 @@ final class TokensApiTest extends TestCase
 
         $result = $apiClient->tokens()->getPaymentCards();
         self::assertCount(1, $result);
-        self::assertIsString($result[0]->getXbot());
+        self::assertIsString($result[0]->getExternalBackOfficeToken());
         self::assertIsString($result[0]->getMediumType());
         self::assertIsString($result[0]->getExternalTransitAccountToken());
         self::assertIsString($result[0]->getStatus());

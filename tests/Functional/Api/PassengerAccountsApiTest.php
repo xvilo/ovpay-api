@@ -24,7 +24,7 @@ final class PassengerAccountsApiTest extends TestCase
         $apiClient->Authenticate(new HeaderMethod('Authorization', 'Bearer TEST'));
 
         $resp = $apiClient->passengerAccounts()->addByServiceReferenceId('1234567ABCDEF', 1445);
-        self::assertEquals($returnUUid, $resp->getPaymentXbot());
+        self::assertEquals($returnUUid, $resp->getPaymentExternalBackOfficeToken());
     }
 
     public function testUnsuccessfulMatch(): void

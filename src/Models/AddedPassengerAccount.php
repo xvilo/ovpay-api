@@ -11,7 +11,7 @@ final class AddedPassengerAccount
     ) {
     }
 
-    public function getPaymentXbot(): string
+    public function getPaymentExternalBackOfficeToken(): string
     {
         return $this->paymentXbot;
     }

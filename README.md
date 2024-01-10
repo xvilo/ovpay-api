@@ -47,7 +47,7 @@ $items = $trips->getItems();
 /** @var Trip $trip */
 $trip = end($items)->getTrip();
 // Get trip details by ID
-var_dump($client->trips()->getTrip($trip->getXbot(), $trip->getId()));
+var_dump($client->trips()->getTrip($trip->getExternalBackOfficeToken(), $trip->getId()));
 //  class Xvilo\OVpayApi\Models\Receipt\ReceiptTrip#94 (4) {
 //    private readonly ?array $correctionOptions =>
 //    NULL

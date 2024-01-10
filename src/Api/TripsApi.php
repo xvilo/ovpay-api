@@ -18,10 +18,10 @@ final class TripsApi extends AbstractApi
         );
     }
 
-    public function getTrip(string $tripXbotUuid, int $tripId): ReceiptTrip
+    public function getTrip(string $tripExternalBackOfficeToken, int $tripId): ReceiptTrip
     {
         return $this->client->getSerializer()->deserialize(
-            $this->get(sprintf('/api/v3/Trips/%s/%d', $tripXbotUuid, $tripId)),
+            $this->get(sprintf('/api/v3/Trips/%s/%d', $tripExternalBackOfficeToken, $tripId)),
             ReceiptTrip::class,
             'json'
         );

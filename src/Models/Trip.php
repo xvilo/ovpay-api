@@ -25,7 +25,7 @@ final class Trip
     ) {
     }
 
-    public function getXbot(): ?string
+    public function getExternalBackOfficeToken(): ?string
     {
         return $this->xbot;
     }

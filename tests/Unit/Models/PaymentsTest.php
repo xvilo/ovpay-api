@@ -39,7 +39,7 @@ final class PaymentsTest extends TestCase
             $uuid,
         ));
         self::assertCount(1, $payments->getItems());
-        self::assertEquals($uuid, $payments->getItems()[0]->getXbot());
+        self::assertEquals($uuid, $payments->getItems()[0]->getExternalBackOfficeToken());
         self::assertEquals($time, $payments->getItems()[0]->getTransactionTimestamp());
     }
 }

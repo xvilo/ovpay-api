@@ -39,7 +39,7 @@ final class ReceiptTest extends TestCase
         ));
         self::assertCount(1, $receipt->getRelatedPayments());
         self::assertEquals('ABCDEFG1234567', $receipt->getRelatedPayments()[0]->getServiceReferenceId());
-        self::assertEquals($paymentXbot, $receipt->getRelatedPayments()[0]->getXbot());
+        self::assertEquals($paymentXbot, $receipt->getRelatedPayments()[0]->getExternalBackOfficeToken());
         self::assertEquals('1234', $receipt->getRelatedPayments()[0]->getId());
         self::assertEquals('COMPLETED', $receipt->getRelatedPayments()[0]->getStatus());
         self::assertEquals($dateTime, $receipt->getRelatedPayments()[0]->getTransactionTimestamp());

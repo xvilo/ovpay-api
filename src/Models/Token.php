@@ -10,10 +10,10 @@ final class Token
 {
     public function __construct(
         private readonly string $mediumType,
+        /** xtat = External Transit Account Token */
         private readonly string $xbot,
         private readonly string $status,
         private readonly TokenPersonalization $personalization,
-        /** xtat = External Transit Account Token */
         private readonly ?string $xtat = null,
     ) {
     }
@@ -23,7 +23,7 @@ final class Token
         return $this->mediumType;
     }
 
-    public function getXbot(): string
+    public function getExternalBackOfficeToken(): string
     {
         return $this->xbot;
     }

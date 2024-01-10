@@ -63,7 +63,7 @@ final class TripsApiTest extends TestCase
 
         $trip = $result->getTrip();
         self::assertInstanceOf(Trip::class, $trip);
-        self::assertEquals('fac5b73b-54e6-4fc4-ab24-7249481c0fdb', $trip->getXbot());
+        self::assertEquals('fac5b73b-54e6-4fc4-ab24-7249481c0fdb', $trip->getExternalBackOfficeToken());
         self::assertEquals(12345678, $trip->getId());
         self::assertEquals(1, $trip->getVersion());
         self::assertEquals('RAIL', $trip->getTransport());
