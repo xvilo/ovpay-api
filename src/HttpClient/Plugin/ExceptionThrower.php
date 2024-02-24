@@ -35,8 +35,12 @@ final class ExceptionThrower implements Plugin
                 throw new UnauthorizedException('Unauthorized. Either no credentials where provided, or the credentials have expired.');
             }
 
-            if ($response->getStatusCode() === 403 && (isset($content['title']) || isset($content['detail']))) {
-                throw new ApiForbiddenException(sprintf('%s %s', $content['title'] ?? '', $content['detail'] ?? ''));
+            if ($response->getStatusCode() === 403) {
+                if ((isset($content['title']) || isset($content['detail']))) {
+                    throw new ApiForbiddenException(sprintf('%s %s', $content['title'] ?? '', $content['detail'] ?? ''));
+                }
+
+                throw new ApiForbiddenException();
             }
 
             if (($content['status'] ?? null) === 404 && isset($content['title'])) {
