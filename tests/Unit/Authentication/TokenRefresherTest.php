@@ -10,6 +10,7 @@ use Lcobucci\JWT\Token\Plain;
 use Xvilo\OVpayApi\Authentication\TokenRefresher;
 use Xvilo\OVpayApi\Tests\Unit\TestCase;
 use Lcobucci\JWT\Token as TokenInterface;
+use Iterator;
 
 final class TokenRefresherTest extends TestCase
 {
@@ -22,24 +23,19 @@ final class TokenRefresherTest extends TestCase
         }
 
         $item = (new TokenRefresher())->refresh($input);
-        self::assertNotEmpty($item);
+        $this->assertNotEmpty($item);
     }
 
-    /**
-     * @return array<string, array<string, array<string,string>|bool|DateTimeImmutable|float|int|Plain|string|null>>
-     */
-    public static function inputDataProvider(): array
+    public static function inputDataProvider(): Iterator
     {
-        return [
-            'With token interface' => ['input' => new Plain(new TokenInterface\DataSet([], 'empty'), new TokenInterface\DataSet([], 'empty'), new TokenInterface\Signature('aa', 'bb')), 'throws' => false],
-            'With string' => ['input' => 'baz', 'throws' => true],
-            'With array' => ['input' => ['foo' => 'bar'], 'throws' => true],
-            'With null' => ['input' => null, 'throws' => true],
-            'With bool - false' => ['input' => false, 'throws' => true],
-            'With bool - true' => ['input' => true, 'throws' => true],
-            'With int' => ['input' => 123, 'throws' => true],
-            'With float' => ['input' => 0.123, 'throws' => true],
-            'With object' => ['input' => new DateTimeImmutable(), 'throws' => true],
-        ];
+        yield 'With token interface' => ['input' => new Plain(new TokenInterface\DataSet([], 'empty'), new TokenInterface\DataSet([], 'empty'), new TokenInterface\Signature('aa', 'bb')), 'throws' => false];
+        yield 'With string' => ['input' => 'baz', 'throws' => true];
+        yield 'With array' => ['input' => ['foo' => 'bar'], 'throws' => true];
+        yield 'With null' => ['input' => null, 'throws' => true];
+        yield 'With bool - false' => ['input' => false, 'throws' => true];
+        yield 'With bool - true' => ['input' => true, 'throws' => true];
+        yield 'With int' => ['input' => 123, 'throws' => true];
+        yield 'With float' => ['input' => 0.123, 'throws' => true];
+        yield 'With object' => ['input' => new DateTimeImmutable(), 'throws' => true];
     }
 }

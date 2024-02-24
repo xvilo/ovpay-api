@@ -17,9 +17,9 @@ final class ReceiptTest extends TestCase
     public function testAddRelatedPayment(): void
     {
         $receipt = new Receipt([], [], [], new Token('Emv', Uuid::uuid4()->toString(), 'Active', new Token\TokenPersonalization('Card', 'Pink', '')));
-        self::assertEmpty($receipt->getRelatedPayments());
-        self::assertEmpty($receipt->getRelatedBalances());
-        self::assertEmpty($receipt->getRelatedTrips());
+        $this->assertEmpty($receipt->getRelatedPayments());
+        $this->assertEmpty($receipt->getRelatedBalances());
+        $this->assertEmpty($receipt->getRelatedTrips());
 
         $paymentXbot = Uuid::uuid4()->toString();
         $dateTime = new DateTimeImmutable();
@@ -37,27 +37,27 @@ final class ReceiptTest extends TestCase
             'ABCDEFG1234567',
             $paymentXbot,
         ));
-        self::assertCount(1, $receipt->getRelatedPayments());
-        self::assertEquals('ABCDEFG1234567', $receipt->getRelatedPayments()[0]->getServiceReferenceId());
-        self::assertEquals($paymentXbot, $receipt->getRelatedPayments()[0]->getExternalBackOfficeToken());
-        self::assertEquals('1234', $receipt->getRelatedPayments()[0]->getId());
-        self::assertEquals('COMPLETED', $receipt->getRelatedPayments()[0]->getStatus());
-        self::assertEquals($dateTime, $receipt->getRelatedPayments()[0]->getTransactionTimestamp());
-        self::assertEquals('type', $receipt->getRelatedPayments()[0]->getTransactionType());
-        self::assertEquals(130, $receipt->getRelatedPayments()[0]->getAmount());
-        self::assertEquals(0, $receipt->getRelatedPayments()[0]->getAmountDue());
-        self::assertEquals('EUR', $receipt->getRelatedPayments()[0]->getCurrency());
-        self::assertEquals('Emv', $receipt->getRelatedPayments()[0]->getPaymentMethod());
-        self::assertEquals(null, $receipt->getRelatedPayments()[0]->getRejectionReason());
-        self::assertEquals(false, $receipt->getRelatedPayments()[0]->isLoyaltyOrDiscount());
+        $this->assertCount(1, $receipt->getRelatedPayments());
+        $this->assertSame('ABCDEFG1234567', $receipt->getRelatedPayments()[0]->getServiceReferenceId());
+        $this->assertSame($paymentXbot, $receipt->getRelatedPayments()[0]->getExternalBackOfficeToken());
+        $this->assertSame('1234', $receipt->getRelatedPayments()[0]->getId());
+        $this->assertSame('COMPLETED', $receipt->getRelatedPayments()[0]->getStatus());
+        $this->assertEquals($dateTime, $receipt->getRelatedPayments()[0]->getTransactionTimestamp());
+        $this->assertSame('type', $receipt->getRelatedPayments()[0]->getTransactionType());
+        $this->assertSame(130, $receipt->getRelatedPayments()[0]->getAmount());
+        $this->assertSame(0, $receipt->getRelatedPayments()[0]->getAmountDue());
+        $this->assertSame('EUR', $receipt->getRelatedPayments()[0]->getCurrency());
+        $this->assertSame('Emv', $receipt->getRelatedPayments()[0]->getPaymentMethod());
+        $this->assertEquals(null, $receipt->getRelatedPayments()[0]->getRejectionReason());
+        $this->assertEquals(false, $receipt->getRelatedPayments()[0]->isLoyaltyOrDiscount());
     }
 
     public function testAddRelatedPTrip(): void
     {
         $receipt = new Receipt([], [], [], new Token('Emv', Uuid::uuid4()->toString(), 'Active', new Token\TokenPersonalization('Card', 'Pink', '')));
-        self::assertEmpty($receipt->getRelatedPayments());
-        self::assertEmpty($receipt->getRelatedBalances());
-        self::assertEmpty($receipt->getRelatedTrips());
+        $this->assertEmpty($receipt->getRelatedPayments());
+        $this->assertEmpty($receipt->getRelatedBalances());
+        $this->assertEmpty($receipt->getRelatedTrips());
 
         $tripXbot = Uuid::uuid4()->toString();
         $receipt->addRelatedTrip(new Receipt\ReceiptTrip(
@@ -81,7 +81,7 @@ final class ReceiptTest extends TestCase
             null,
         ));
 
-        self::assertCount(1, $receipt->getRelatedTrips());
-        self::assertInstanceOf(Receipt\ReceiptTrip::class, $receipt->getRelatedTrips()[0]);
+        $this->assertCount(1, $receipt->getRelatedTrips());
+        $this->assertInstanceOf(Receipt\ReceiptTrip::class, $receipt->getRelatedTrips()[0]);
     }
 }

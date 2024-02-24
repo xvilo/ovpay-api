@@ -9,6 +9,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Http\Message\RequestInterface;
 use Xvilo\OVpayApi\Authentication\TokenMethod;
 use Xvilo\OVpayApi\Tests\Unit\TestCase;
+use Iterator;
 
 final class TokenMethodTest extends TestCase
 {
@@ -21,26 +22,26 @@ final class TokenMethodTest extends TestCase
             ->willReturn($input);
 
         $method = new TokenMethod($token);
-        self::assertEquals($expected, $method->isExpired());
+        $this->assertEquals($expected, $method->isExpired());
     }
 
     public function testGetToken(): void
     {
         $token = $this->getTokenMock();
         $method = new TokenMethod($token);
-        self::assertEquals($token, $method->getToken());
+        $this->assertEquals($token, $method->getToken());
     }
 
     public function testSetToken(): void
     {
         $token = $this->getTokenMock();
         $method = new TokenMethod($token);
-        self::assertEquals($token, $method->getToken());
+        $this->assertEquals($token, $method->getToken());
         $newToken = $this->getTokenMock();
         $method->setToken($newToken);
-        self::assertInstanceOf(TokenInterface::class, $method->getToken());
-        self::assertNotSame($token, $method->getToken());
-        self::assertEquals($newToken, $method->getToken());
+        $this->assertInstanceOf(TokenInterface::class, $method->getToken());
+        $this->assertNotSame($token, $method->getToken());
+        $this->assertEquals($newToken, $method->getToken());
     }
 
     public function testUpdateRequest(): void
@@ -49,7 +50,7 @@ final class TokenMethodTest extends TestCase
 
         $request->expects($this->once())
             ->method('withHeader')
-            ->with($this->equalTo('Authorization'), $this->equalTo('Bearer TEST'))
+            ->with('Authorization', 'Bearer TEST')
             ->willReturn($request);
 
         $token = $this->getTokenMock();
@@ -61,12 +62,10 @@ final class TokenMethodTest extends TestCase
         $method->updateRequest($request);
     }
 
-    public static function tokenExpiredDataProvider(): array
+    public static function tokenExpiredDataProvider(): Iterator
     {
-        return [
-            'true' => [true, true],
-            'false' => [false, false],
-        ];
+        yield 'true' => [true, true];
+        yield 'false' => [false, false];
     }
 
     private function getTokenMock(): MockObject|TokenInterface

@@ -43,7 +43,7 @@ abstract class AbstractApi
      *
      * @return array|string
      */
-    protected function post(string $path, array $parameters = [], array $requestHeaders = [])
+    protected function post(string $path, array $parameters = [], array $requestHeaders = []): string
     {
         return $this->postRaw(
             $path,
@@ -89,6 +89,6 @@ abstract class AbstractApi
      */
     protected function createJsonBody(array $parameters): ?string
     {
-        return ($parameters === []) ? null : json_encode($parameters, empty($parameters) ? JSON_FORCE_OBJECT : 0);
+        return ($parameters === []) ? null : json_encode($parameters, $parameters === [] ? JSON_FORCE_OBJECT : 0);
     }
 }

@@ -9,6 +9,7 @@ use Symfony\Component\HttpClient\Response\MockResponse;
 use Xvilo\OVpayApi\Models\CorrectionOptions;
 use Xvilo\OVpayApi\Models\Notices;
 use Xvilo\OVpayApi\Tests\Functional\TestCase;
+use Iterator;
 
 final class AnonymousApiTest extends TestCase
 {
@@ -19,19 +20,19 @@ final class AnonymousApiTest extends TestCase
         );
 
         $res = $apiClient->anonymous()->getNotices();
-        self::assertInstanceOf(Notices::class, $res);
-        self::assertIsArray($res->getServiceWebsiteDisruptions());
-        self::assertIsArray($res->getOvPayAppDisruptions());
-        self::assertEmpty($res->getServiceWebsiteDisruptions());
-        self::assertEmpty($res->getOvPayAppDisruptions());
+        $this->assertInstanceOf(Notices::class, $res);
+        $this->assertIsArray($res->getServiceWebsiteDisruptions());
+        $this->assertIsArray($res->getOvPayAppDisruptions());
+        $this->assertEmpty($res->getServiceWebsiteDisruptions());
+        $this->assertEmpty($res->getOvPayAppDisruptions());
 
-        self::assertInstanceOf(Notices\TermsAndConditions::class, $res->getTermsAndConditions());
-        self::assertEquals([], $res->getTermsAndConditions()->getHighlights());
-        self::assertInstanceOf(DateTimeImmutable::class, $res->getTermsAndConditions()->getLastModified());
+        $this->assertInstanceOf(Notices\TermsAndConditions::class, $res->getTermsAndConditions());
+        $this->assertSame([], $res->getTermsAndConditions()->getHighlights());
+        $this->assertInstanceOf(DateTimeImmutable::class, $res->getTermsAndConditions()->getLastModified());
 
-        self::assertInstanceOf(Notices\PrivacyStatement::class, $res->getPrivacyStatement());
-        self::assertInstanceOf(DateTimeImmutable::class, $res->getPrivacyStatement()->getLastModified());
-        self::assertEquals([], $res->getPrivacyStatement()->getHighlights());
+        $this->assertInstanceOf(Notices\PrivacyStatement::class, $res->getPrivacyStatement());
+        $this->assertInstanceOf(DateTimeImmutable::class, $res->getPrivacyStatement()->getLastModified());
+        $this->assertSame([], $res->getPrivacyStatement()->getHighlights());
     }
 
     #[\PHPUnit\Framework\Attributes\DataProvider('registrationOpenDataProvider')]
@@ -40,18 +41,16 @@ final class AnonymousApiTest extends TestCase
         $apiClient = $this->getApiClientWithHttpClient(
             $this->getMockHttpClient(new MockResponse($data))
         );
-        self::assertEquals($expected, $apiClient->anonymous()->isRegistrationOpen());
+        $this->assertEquals($expected, $apiClient->anonymous()->isRegistrationOpen());
     }
 
-    public static function registrationOpenDataProvider(): array
+    public static function registrationOpenDataProvider(): Iterator
     {
-        return [
-            'bare-true' => ['data' => 'true', 'expected' => true],
-            'true-in-array' => ['data' => '[true]', 'expected' => true],
-            'bare-false' => ['data' => 'false', 'expected' => false],
-            'false-in-array' => ['data' => '[false]', 'expected' => false],
-            'random' => ['data' => '{"foo": "bar"}', 'expected' => false],
-        ];
+        yield 'bare-true' => ['data' => 'true', 'expected' => true];
+        yield 'true-in-array' => ['data' => '[true]', 'expected' => true];
+        yield 'bare-false' => ['data' => 'false', 'expected' => false];
+        yield 'false-in-array' => ['data' => '[false]', 'expected' => false];
+        yield 'random' => ['data' => '{"foo": "bar"}', 'expected' => false];
     }
 
     public function testGetReceipt(): void
@@ -59,28 +58,28 @@ final class AnonymousApiTest extends TestCase
         $apiClient = $this->getApiClientWithHttpClient($this->getMockHttpClient(new MockResponse($this->getAnonymousReceiptResponse())));
 
         $res = $apiClient->anonymous()->getReceipt('ABCD', 0000);
-        self::assertCount(1, $res->getRelatedPayments());
-        self::assertCount(4, $res->getRelatedTrips());
-        self::assertCount(0, $res->getRelatedBalances());
-        self::assertNull($res->getToken());
+        $this->assertCount(1, $res->getRelatedPayments());
+        $this->assertCount(4, $res->getRelatedTrips());
+        $this->assertCount(0, $res->getRelatedBalances());
+        $this->assertNull($res->getToken());
 
         foreach ($res->getRelatedTrips() as $relatedTrip) {
             if ($relatedTrip->getTrip()->getId() === 130788476) {
                 $correctionOptions = $relatedTrip->getCorrectionOptions();
-                self::assertInstanceOf(CorrectionOptions::class, $correctionOptions);
-                self::assertEquals('CorrectableNoStops', $correctionOptions->getCorrectableStatus());
-                self::assertInstanceOf(DateTimeImmutable::class, $correctionOptions->getCorrectionWindowEnd());
-                self::assertInstanceOf(DateTimeImmutable::class, $correctionOptions->getCorrectionWindowStart());
-                self::assertTrue($correctionOptions->isOnboardValidation());
-                self::assertIsArray($correctionOptions->getStops());
-                self::assertCount(1, $correctionOptions->getStops());
+                $this->assertInstanceOf(CorrectionOptions::class, $correctionOptions);
+                $this->assertSame('CorrectableNoStops', $correctionOptions->getCorrectableStatus());
+                $this->assertInstanceOf(DateTimeImmutable::class, $correctionOptions->getCorrectionWindowEnd());
+                $this->assertInstanceOf(DateTimeImmutable::class, $correctionOptions->getCorrectionWindowStart());
+                $this->assertTrue($correctionOptions->isOnboardValidation());
+                $this->assertIsArray($correctionOptions->getStops());
+                $this->assertCount(1, $correctionOptions->getStops());
 
-                self::assertEquals('45526', $correctionOptions->getStops()[0]->getPrivateCode());
-                self::assertCount(2, $correctionOptions->getStops()[0]->getLocalizedNames());
-                self::assertEquals('nl-NL', $correctionOptions->getStops()[0]->getLocalizedNames()[0]->getLanguage());
-                self::assertEquals('City 1, Stop 2', $correctionOptions->getStops()[0]->getLocalizedNames()[0]->getText());
-                self::assertEquals('en-US', $correctionOptions->getStops()[0]->getLocalizedNames()[1]->getLanguage());
-                self::assertEquals('City 1, Stop 2', $correctionOptions->getStops()[0]->getLocalizedNames()[1]->getText());
+                $this->assertSame('45526', $correctionOptions->getStops()[0]->getPrivateCode());
+                $this->assertCount(2, $correctionOptions->getStops()[0]->getLocalizedNames());
+                $this->assertSame('nl-NL', $correctionOptions->getStops()[0]->getLocalizedNames()[0]->getLanguage());
+                $this->assertSame('City 1, Stop 2', $correctionOptions->getStops()[0]->getLocalizedNames()[0]->getText());
+                $this->assertSame('en-US', $correctionOptions->getStops()[0]->getLocalizedNames()[1]->getLanguage());
+                $this->assertSame('City 1, Stop 2', $correctionOptions->getStops()[0]->getLocalizedNames()[1]->getText());
             }
         }
     }

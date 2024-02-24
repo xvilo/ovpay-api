@@ -27,9 +27,9 @@ class HttpClientBuilder
     private ?HttpMethodsClient $pluginClient = null;
 
     public function __construct(
-        HttpClient $httpClient = null,
-        RequestFactoryInterface $requestFactory = null,
-        StreamFactoryInterface $streamFactory = null
+        ?HttpClient $httpClient = null,
+        ?RequestFactoryInterface $requestFactory = null,
+        ?StreamFactoryInterface $streamFactory = null
     ) {
         $this->httpClient = $httpClient ?: HttpClientDiscovery::find();
         $this->requestFactory = $requestFactory ?: Psr17FactoryDiscovery::findRequestFactory();
@@ -66,7 +66,7 @@ class HttpClientBuilder
 
     public function getHttpClient(): HttpMethodsClient
     {
-        if (!isset($this->pluginClient)) {
+        if (!$this->pluginClient instanceof HttpMethodsClient) {
             $plugins = $this->plugins;
             $this->pluginClient = new HttpMethodsClient(
                 (new PluginClientFactory())->createClient($this->httpClient, $plugins),
