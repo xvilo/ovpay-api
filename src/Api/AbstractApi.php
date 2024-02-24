@@ -40,8 +40,6 @@ abstract class AbstractApi
      * @param string $path           request path
      * @param array  $parameters     POST parameters to be JSON encoded
      * @param array  $requestHeaders request headers
-     *
-     * @return array|string
      */
     protected function post(string $path, array $parameters = [], array $requestHeaders = []): string
     {
