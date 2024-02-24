@@ -18,18 +18,18 @@
         "php-http/client-common": "^2.6",
         "php-http/discovery": "^1.14",
         "lcobucci/jwt": "^4.2 || ^5.0",
-        "symfony/serializer": "^5.4 || ^6.2",
-        "symfony/var-dumper": "^6.3"
+        "symfony/serializer": "^5.4 || ^6.4 || ^7.0",
+        "symfony/var-dumper": "^5.4 || ^6.4 || ^7.0"
     },
     "require-dev": {
-        "phpstan/phpstan": "^1.9",
-        "rector/rector": "^0.15.2 || ^0.16.0 || ^0.17.0 || ^0.18.0",
         "nyholm/psr7": "^1.5",
-        "symfony/http-client": "^6.2",
+        "symfony/http-client": "^5.4 || ^6.4 || ^7.0",
         "phpunit/phpunit": "^10.0",
-        "symfony/property-access": "^5.4 || ^6.2",
+        "symfony/property-access": "^5.4 || ^6.4 || ^7.0",
         "friendsofphp/php-cs-fixer": "^3.13",
-        "ramsey/uuid": "^4.7"
+        "ramsey/uuid": "^4.7",
+        "rector/rector": "^1.0",
+        "phpstan/phpstan": "^1.10"
     },
     "config": {
         "allow-plugins": {

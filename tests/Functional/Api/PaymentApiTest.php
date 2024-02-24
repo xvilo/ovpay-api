@@ -24,12 +24,12 @@ final class PaymentApiTest extends TestCase
 
         $result = $apiClient->payment()->getPayments('2af820fb-30a4-48fe-881e-21521c94a95e');
 
-        self::assertInstanceOf(Payments::class, $result);
-        self::assertTrue($result->isEndOfListReached());
-        self::assertEquals(3, $result->getOffset());
-        self::assertNotEmpty($result->getItems());
-        self::assertCount(1, $result->getItems());
-        self::assertInstanceOf(Payment::class, $result->getItems()[0]);
+        $this->assertInstanceOf(Payments::class, $result);
+        $this->assertTrue($result->isEndOfListReached());
+        $this->assertSame(3, $result->getOffset());
+        $this->assertNotEmpty($result->getItems());
+        $this->assertCount(1, $result->getItems());
+        $this->assertInstanceOf(Payment::class, $result->getItems()[0]);
     }
 
     public function testGetPaymentsNoAuth(): void
@@ -53,16 +53,16 @@ final class PaymentApiTest extends TestCase
         $apiClient->Authenticate(new HeaderMethod('Authorization', 'Bearer TEST'));
 
         $result = $apiClient->payment()->getReceipt('f7386e11-1142-47a9-bf61-39ac6825588e', 'EVENT-O12-12345678901234567890123456789');
-        self::assertNotEmpty($result->getRelatedPayments());
-        self::assertCount(1, $result->getRelatedPayments());
-        self::assertInstanceOf(Payment::class, $result->getRelatedPayments()[0]);
+        $this->assertNotEmpty($result->getRelatedPayments());
+        $this->assertCount(1, $result->getRelatedPayments());
+        $this->assertInstanceOf(Payment::class, $result->getRelatedPayments()[0]);
 
-        self::assertNotEmpty($result->getRelatedTrips());
-        self::assertCount(1, $result->getRelatedTrips());
-        self::assertInstanceOf(ReceiptTrip::class, $result->getRelatedTrips()[0]);
+        $this->assertNotEmpty($result->getRelatedTrips());
+        $this->assertCount(1, $result->getRelatedTrips());
+        $this->assertInstanceOf(ReceiptTrip::class, $result->getRelatedTrips()[0]);
 
-        self::assertEmpty($result->getRelatedBalances());
-        self::assertInstanceOf(Token::class, $result->getToken());
+        $this->assertEmpty($result->getRelatedBalances());
+        $this->assertInstanceOf(Token::class, $result->getToken());
     }
 
     public function testGetReceiptNoAuth(): void

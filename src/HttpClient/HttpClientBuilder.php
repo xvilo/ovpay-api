@@ -7,15 +7,15 @@ namespace Xvilo\OVpayApi\HttpClient;
 use Http\Client\Common\HttpMethodsClient;
 use Http\Client\Common\Plugin;
 use Http\Client\Common\PluginClientFactory;
-use Http\Client\HttpClient;
 use Http\Discovery\HttpClientDiscovery;
 use Http\Discovery\Psr17FactoryDiscovery;
+use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 
 class HttpClientBuilder
 {
-    private readonly HttpClient $httpClient;
+    private readonly ClientInterface $httpClient;
 
     private readonly RequestFactoryInterface $requestFactory;
 
@@ -27,9 +27,9 @@ class HttpClientBuilder
     private ?HttpMethodsClient $pluginClient = null;
 
     public function __construct(
-        HttpClient $httpClient = null,
-        RequestFactoryInterface $requestFactory = null,
-        StreamFactoryInterface $streamFactory = null
+        ?ClientInterface $httpClient = null,
+        ?RequestFactoryInterface $requestFactory = null,
+        ?StreamFactoryInterface $streamFactory = null
     ) {
         $this->httpClient = $httpClient ?: HttpClientDiscovery::find();
         $this->requestFactory = $requestFactory ?: Psr17FactoryDiscovery::findRequestFactory();
@@ -66,7 +66,7 @@ class HttpClientBuilder
 
     public function getHttpClient(): HttpMethodsClient
     {
-        if (!isset($this->pluginClient)) {
+        if (!$this->pluginClient instanceof HttpMethodsClient) {
             $plugins = $this->plugins;
             $this->pluginClient = new HttpMethodsClient(
                 (new PluginClientFactory())->createClient($this->httpClient, $plugins),

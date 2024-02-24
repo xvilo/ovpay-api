@@ -15,13 +15,13 @@ final class TripsTest extends TestCase
     public function testTripsNoItems(): void
     {
         $trips = new Trips(1, true, []);
-        self::assertEquals([], $trips->getItems());
+        $this->assertSame([], $trips->getItems());
     }
 
     public function testTripsNoItemsAddItem(): void
     {
         $trips = new Trips(1, true, []);
-        self::assertEquals([], $trips->getItems());
+        $this->assertSame([], $trips->getItems());
     }
 
     public function testTripsWithItem(): void
@@ -45,8 +45,8 @@ final class TripsTest extends TestCase
             new DateTimeImmutable(), null
         );
         $trips = new Trips(1, true, [$item]);
-        self::assertCount(1, $trips->getItems());
-        self::assertEquals($item, $trips->getItems()[0]);
+        $this->assertCount(1, $trips->getItems());
+        $this->assertEquals($item, $trips->getItems()[0]);
     }
 
     public function testTripsWithItemAddItem(): void
@@ -91,8 +91,8 @@ final class TripsTest extends TestCase
         );
         $trips->addItem($itemTwo);
 
-        self::assertCount(2, $trips->getItems());
-        self::assertEquals($item, $trips->getItems()[0]);
-        self::assertEquals($itemTwo, $trips->getItems()[1]);
+        $this->assertCount(2, $trips->getItems());
+        $this->assertEquals($item, $trips->getItems()[0]);
+        $this->assertEquals($itemTwo, $trips->getItems()[1]);
     }
 }

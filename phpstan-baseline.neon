@@ -31,11 +31,6 @@ parameters:
 			path: src/Api/AbstractApi.php
 
 		-
-			message: "#^Method Xvilo\\\\OVpayApi\\\\Api\\\\AbstractApi\\:\\:post\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Api/AbstractApi.php
-
-		-
 			message: "#^Method Xvilo\\\\OVpayApi\\\\Api\\\\AbstractApi\\:\\:postRaw\\(\\) has parameter \\$requestHeaders with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Api/AbstractApi.php
@@ -46,7 +41,7 @@ parameters:
 			path: src/Api/AbstractApi.php
 
 		-
-			message: "#^Variable \\$parameters in empty\\(\\) always exists and is not falsy\\.$#"
+			message: "#^Strict comparison using \\=\\=\\= between non\\-empty\\-array and array\\{\\} will always evaluate to false\\.$#"
 			count: 1
 			path: src/Api/AbstractApi.php
 
@@ -66,11 +61,6 @@ parameters:
 			path: src/Models/Receipt.php
 
 		-
-			message: "#^Method Xvilo\\\\OVpayApi\\\\Tests\\\\Functional\\\\Api\\\\AnonymousApiTest\\:\\:registrationOpenDataProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: tests/Functional/Api/AnonymousApiTest.php
-
-		-
 			message: "#^Method Xvilo\\\\OVpayApi\\\\Tests\\\\Functional\\\\TestCase\\:\\:getMockHttpClient\\(\\) has parameter \\$responseFactory with no value type specified in iterable type iterable\\.$#"
 			count: 1
 			path: tests/Functional/TestCase.php
@@ -88,11 +78,6 @@ parameters:
 		-
 			message: "#^Call to an undefined method Lcobucci\\\\JWT\\\\Token\\|PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\:\\:expects\\(\\)\\.$#"
 			count: 2
-			path: tests/Unit/Authentication/TokenMethodTest.php
-
-		-
-			message: "#^Method Xvilo\\\\OVpayApi\\\\Tests\\\\Unit\\\\Authentication\\\\TokenMethodTest\\:\\:tokenExpiredDataProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
 			path: tests/Unit/Authentication/TokenMethodTest.php
 
 		-
