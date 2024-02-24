@@ -20,7 +20,7 @@ final class PaymentsTest extends TestCase
             []
         );
 
-        self::assertCount(0, $payments->getItems());
+        $this->assertCount(0, $payments->getItems());
 
         $uuid = Uuid::uuid4()->toString();
         $time = new DateTimeImmutable();
@@ -38,8 +38,8 @@ final class PaymentsTest extends TestCase
             'ABCDEFG1234567',
             $uuid,
         ));
-        self::assertCount(1, $payments->getItems());
-        self::assertEquals($uuid, $payments->getItems()[0]->getExternalBackOfficeToken());
-        self::assertEquals($time, $payments->getItems()[0]->getTransactionTimestamp());
+        $this->assertCount(1, $payments->getItems());
+        $this->assertSame($uuid, $payments->getItems()[0]->getExternalBackOfficeToken());
+        $this->assertEquals($time, $payments->getItems()[0]->getTransactionTimestamp());
     }
 }

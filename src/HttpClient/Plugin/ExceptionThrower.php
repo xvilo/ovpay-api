@@ -36,7 +36,7 @@ final class ExceptionThrower implements Plugin
             }
 
             if ($response->getStatusCode() === 403) {
-                if ((isset($content['title']) || isset($content['detail']))) {
+                if (isset($content['title']) || isset($content['detail'])) {
                     throw new ApiForbiddenException(sprintf('%s %s', $content['title'] ?? '', $content['detail'] ?? ''));
                 }
 

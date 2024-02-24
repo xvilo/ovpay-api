@@ -12,6 +12,7 @@ use Xvilo\OVpayApi\Exception\ApiForbiddenException;
 use Xvilo\OVpayApi\Exception\ApiResourceNotFound;
 use Xvilo\OVpayApi\Exception\UnauthorizedException;
 use Xvilo\OVpayApi\Tests\Functional\TestCase;
+use Iterator;
 
 final class PassengerAccountsApiTest extends TestCase
 {
@@ -24,7 +25,7 @@ final class PassengerAccountsApiTest extends TestCase
         $apiClient->Authenticate(new HeaderMethod('Authorization', 'Bearer TEST'));
 
         $resp = $apiClient->passengerAccounts()->addByServiceReferenceId('1234567ABCDEF', 1445);
-        self::assertEquals($returnUUid, $resp->getPaymentExternalBackOfficeToken());
+        $this->assertEquals($returnUUid, $resp->getPaymentExternalBackOfficeToken());
     }
 
     public function testUnsuccessfulMatch(): void
@@ -45,7 +46,7 @@ final class PassengerAccountsApiTest extends TestCase
 
     public function testUnauthenticatedRequest(): void
     {
-        $returnUUid = UUid::uuid4();
+        $returnUUid = Uuid::uuid4();
         $paymentServiceReferenceId = 'NLOV1234567ABCDEFG';
         $amountInCents = 4830;
         $apiClient = $this->getApiClientWithHttpClient($this->getMockHttpClient(
@@ -84,7 +85,7 @@ final class PassengerAccountsApiTest extends TestCase
         $apiClient->Authenticate(new HeaderMethod('Authorization', 'Bearer TEST'));
 
         $resp = $apiClient->passengerAccounts()->deletePassengerAccount($cardXtat->toString());
-        self::assertTrue($resp);
+        $this->assertTrue($resp);
     }
 
     public function testDeleteRandomPassengerAccount(): void
@@ -119,15 +120,10 @@ final class PassengerAccountsApiTest extends TestCase
         $apiClient->passengerAccounts()->addByServiceReferenceId($paymentServiceReferenceId, 2023);
     }
 
-    /**
-     * @return array<string, array<int, string>>
-     */
-    public static function paymentServiceReferenceIdProvider(): array
+    public static function paymentServiceReferenceIdProvider(): Iterator
     {
-        return [
-            'Correct clean' => ['12345ABCDEF', 'NLOV12345ABCDEF'],
-            'No clean needed' => ['12345ABCDEF', '12345ABCDEF'],
-            'Only clean at beginning' => ['12345NLOVEF', '12345NLOVEF'],
-        ];
+        yield 'Correct clean' => ['12345ABCDEF', 'NLOV12345ABCDEF'];
+        yield 'No clean needed' => ['12345ABCDEF', '12345ABCDEF'];
+        yield 'Only clean at beginning' => ['12345NLOVEF', '12345NLOVEF'];
     }
 }

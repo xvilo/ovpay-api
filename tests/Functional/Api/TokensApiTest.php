@@ -20,17 +20,17 @@ final class TokensApiTest extends TestCase
         $apiClient->Authenticate(new HeaderMethod('Authorization', 'Bearer TEST'));
 
         $result = $apiClient->tokens()->getPaymentCards();
-        self::assertCount(1, $result);
-        self::assertIsString($result[0]->getExternalBackOfficeToken());
-        self::assertIsString($result[0]->getMediumType());
-        self::assertIsString($result[0]->getExternalTransitAccountToken());
-        self::assertIsString($result[0]->getStatus());
+        $this->assertCount(1, $result);
+        $this->assertIsString($result[0]->getExternalBackOfficeToken());
+        $this->assertIsString($result[0]->getMediumType());
+        $this->assertIsString($result[0]->getExternalTransitAccountToken());
+        $this->assertIsString($result[0]->getStatus());
 
         $tokenPersonalization = $result[0]->getPersonalization();
-        self::assertInstanceOf(TokenPersonalization::class, $tokenPersonalization);
-        self::assertEquals('Pink', $tokenPersonalization->getColor());
-        self::assertEquals('PhysicalCard', $tokenPersonalization->getMedium());
-        self::assertEquals('', $tokenPersonalization->getName());
+        $this->assertInstanceOf(TokenPersonalization::class, $tokenPersonalization);
+        $this->assertSame('Pink', $tokenPersonalization->getColor());
+        $this->assertSame('PhysicalCard', $tokenPersonalization->getMedium());
+        $this->assertSame('', $tokenPersonalization->getName());
     }
 
     public function testGetCardsNoAuth(): void
